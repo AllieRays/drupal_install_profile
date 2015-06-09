@@ -1,0 +1,78 @@
+<?php
+/**
+ * @file
+ * Sample Bean Content to fill out icttemplate
+ */
+//http://www.pixelite.co.nz/article/how-use-entity-metadata-wrappers-drupal-7/
+function idi_default_beans_install(){
+    //Enable the included features module that contains some field/content type configuration
+    if (!module_exists('idi_bean_settings')) {
+        $modules = array('idi_bean_settings');
+        module_enable($modules);
+    }
+}
+
+function idi_default_beans_uninstall(){
+    //Disable the included features module that contains some field/content type configuration
+    if (module_exists('idi_bean_settings')) {
+        $modules = array('idi_bean_settings');
+        module_disable($modules);
+    }
+   // idi_default_beans_disable();
+}
+
+function idi_default_beans_enable(){
+    foreach (idi_default_beans_info() as $bean_content) {
+        $bean_ids = array();
+        $bean = bean_create(array('type' => 'default_beans'));
+        $bean_wrap = entity_metadata_wrapper('bean', $bean);
+        $bean_wrap->label->set($bean_content['label']);
+        $bean_wrap->title->set($bean_content['title']);
+        $bean_wrap->field_text->set(array(
+            'value' => ($bean_content['field_text']),
+            'format' => ('full_html'),
+        ));
+        $bean_wrap->save();
+        $bean_ids[] = $bean_wrap->bid->value();
+        //set variable to store bean ids
+        variable_set('idi_default_beans_bean_ids', $bean_ids);
+    }
+}
+
+function idi_default_beans_disable(){
+  $bids = variable_get('idi_default_beans_bean_ids', array());
+    foreach($bids as $key => $bid){
+        $bean = bean_load($bid);
+        bean_delete($bean);
+    }
+}
+
+function idi_default_beans_info(){
+    //define some variables and then set the bean content
+    global $base_url;
+    variable_set('site_name', 'SITE_NAME');
+    $site_name =  variable_get('site_name');
+
+    $bean_content = array(
+        'Footer Content' => array(
+            'label' => 'Footer Content',
+            'delta' => 'footer-content',
+            'region' => 'footer',
+            'weight' => '1',
+            'field_text' =>  '<a href="sitemap">' . t('Sitemap') . '</a>' . ' <a href="/privacy-policy">' . t('Privacy Policy' . '</a><br>') . t('Copyright ') . (date("Y")) . t('.') . ' <a href="http://www.studywebsiteurl.com">' . t('studywebsiturl.com') . '</a>' . t(' All rights reserved'),
+        ),
+        'Footer Logo' => array(
+            'label' => 'Footer Logo',
+            'region' => 'footer',
+            'weight' => '1',
+            'field_text' =>  '<a href="#"><img src="/' . conf_path() . '/files/footer-logo.png"/></a>',
+        ),
+        'Front Banner' => array(
+            'label' => 'Front Banner',
+            'region' => 'banner',
+            'weight' => '1',
+            'field_text' => '<div class="background-banner"><p>' . $site_name . '<br>' . t('by inVentiv Digital') . '</p></div>',
+        ),
+  );
+  return $bean_content;
+}

@@ -1,0 +1,59 @@
+ $bannerRegionHeight:auto;
+ $bannerRegionMargin: 0;
+ $bannerRegionPadding: 0;
+ $bannerRegionBackground: $banner-region-color;
+ $bannerRegionInnerBackground:$bannerRegionBackground;
+ $banner-height: 280px;
+
+ .l-region.l-region--banner{
+   margin:$bannerRegionMargin;
+   padding: $bannerRegionPadding;
+   height: $bannerRegionHeight;
+   background:$white;
+   margin-bottom: 40px;
+
+   .inner{
+    position:relative;
+
+   }
+ .gradient-wrapper{
+   height: $banner-height;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+ }
+   .background-banner{
+     @include background(url('../images/gplaypattern.png') repeat 0 0);
+     //background-size:cover;
+     height: 160px;
+     box-shadow: inset 80px 0 50px -30px rgba(255, 255, 255, 1.8), inset -80px 0 50px -30px rgba(255, 255, 255, 1.8);
+     @include breakpoint($tab){
+       height:200px;
+     }
+     @include breakpoint($desk){
+       height: $banner-height;
+     }
+     p{
+     font-size:30px;
+     color:$idi-dark-blue;
+     text-align:center;
+     margin:0;
+     @extend .center;
+     @include breakpoint($tab){
+       font-size:40px;
+     }
+     @include breakpoint($desk){
+       font-size:70px;
+     }
+
+   }
+   }
+}
+
+
+
+
+ .l-header .l-branding a.site-logo img{
+   max-height:40px;
+ }

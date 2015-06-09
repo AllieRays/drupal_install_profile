@@ -1,0 +1,24 @@
+.field--name-field-answer{
+  @extend .no-animation;
+  display:none;
+}
+
+
+    .field--name-field-question-title {
+      display: block;
+      background: $primary;
+      padding: 8px;
+      cursor: pointer;
+      color: $white;
+      @extend .tablet-only;
+      p{
+        margin:0;
+      }
+    }
+
+.node--question{
+  margin-bottom:5px;
+   .node__title{
+   display:none;
+   }
+}

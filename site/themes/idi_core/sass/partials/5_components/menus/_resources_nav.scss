@@ -1,0 +1,66 @@
+//Resource nav (aka: footer nav)
+
+//wrapping dimension settings
+$resources-menu-height : 16px;
+$resources-menu-margin: $vert-spacing-unit $horz-spacing-unit 0 0; //Overridden by grid
+$resources-menu-padding: 0;//Overridden by grid
+$resources-menu-background: none;
+
+//Nav items (drop downs not supported, clone main-menu instead)
+$resources-nav-item-height: 16px;
+$resources-nav-item-margin:0 0 5px 0;
+$resources-nav-bullet-width: 16px;
+$resources-nav-bullet-height: 16px;
+$resources-nav-bullet-gap: 10px;
+$resources-nav-bullet-left-position: 10px;
+$resources-nav-bullet-top-position: center;
+$resources-nav-bullet-image: url(../images/bg_bullet.gif) $resources-nav-bullet-left-position $resources-nav-bullet-top-position transparent;
+$resources-nav-font: normal #{14px}/#{$resources-nav-item-height} $master-font;
+$resources-nav-color: $copy-color;
+$resources-nav-a-color: $copy-color;
+$resources-nav-a-hover-color: $copy-color;
+
+
+//Resource nav - Core menu code is FRAGILE, alter with caution!
+//90% of styling can be accomplished above this line
+
+//Block styling
+#block-menu-menu-resources-menu{
+    min-height: $resources-menu-height;
+    margin: $resources-menu-margin;
+    padding: $resources-menu-padding;
+    background: $resources-menu-background;
+
+    //Override with Grid
+    @include span(3 of 3);
+    @include breakpoint($tab){
+        @include span(3 of 9);
+    }
+    @include breakpoint($desk){
+        @include span(3 of 12);
+    }
+}
+
+//Nav styling
+.block--menu-menu-menu-resources-menu{
+   // @extend .horizontal;
+    //@extend .vertical-block; //Horizontal by default, comment this in to make vertical
+    ul.menu{
+        list-style:none;
+        li, li.expanded, li.leaf{
+            min-height: $resources-nav-item-height;
+            padding-left: $resources-nav-bullet-width + $resources-nav-bullet-gap;
+            @include background($resources-nav-bullet-image);
+            font: $resources-nav-font;
+            color: $resources-nav-color;
+            margin: $resources-nav-item-margin;
+            a{
+                color: $resources-nav-color;
+                &:hover{
+                    color:$resources-nav-a-hover-color;
+                }
+            }
+        }
+    }
+
+}

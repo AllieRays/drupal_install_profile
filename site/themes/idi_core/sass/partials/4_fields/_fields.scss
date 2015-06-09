@@ -1,0 +1,58 @@
+//Atomic level field styling for Drupal field types
+//Place reusable field default styles here (using type selectors) and override at the node or view level
+
+//Image field
+.field--type-image{
+  img{
+    width:auto;
+    height:auto;
+  }
+}
+
+//Body field
+.field--type-text-with-summary{
+  .image{
+    border-radius:4px;
+    margin:0 12px 12px 12px;
+    @include pie-element(relative);
+    float:left;
+    a{
+
+    }
+    img.insert-image{
+      border-radius:4px 4px 0 0;
+      float:none;
+      margin:0;
+      @include pie-element(relative);
+    }
+    .caption{
+      display:block;
+      padding:8px 12px;
+      margin:0;
+      background:#eeeeee;
+      color:$darkGray;
+      font:normal 12px/16px $openSans;
+      text-align:left;
+      border-radius:0 0 4px 4px;
+      @include pie-element(relative);
+
+    }
+  }
+
+  img.insert-image{
+    border-radius:4px;
+    margin:0 12px 12px 12px;
+    float:left;
+    @include pie-element(relative);
+    &.image-full-content{
+
+      width:100%!important;
+      height:auto!important;
+      margin-left:0;
+      margin-right:0;
+      float:none;
+    }
+  }
+}
+//Five Star field
+.field--type-fivestar{}

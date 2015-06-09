@@ -1,0 +1,36 @@
+//Default views styles
+
+//All views should have their own partials, display modes should be handled in said partials
+
+//When you make a new view cut and paste this into a new view partial for a handy skeleton!
+.view{
+
+    .view-header{}
+    .view-filters{}
+    .view-content{
+       .views-row{
+           width:100%;
+
+           .field-content{}
+
+           .image img{}
+           .scaling-image img{
+              width:100%;
+              height:auto;
+           }
+
+       }
+
+    }
+    .view-footer{}
+    .attachment{
+
+         &.attachment-before{}
+         &.attachment-after{}
+    }
+
+    .pager{}
+
+    &.view-display-id-page{}
+    &.view-display-id-block{}
+}

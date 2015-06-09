@@ -1,0 +1,43 @@
+//Content Wrapper Styling
+$contentHeight: auto !default;
+$contentMargin : 0 !default;
+$contentPadding : 0 !default;
+$contentBackground: $main-content-region-color;
+$contentInnerHeight: auto !default;
+$contentInnerMargin :  0 auto !default;
+$contentInnerPadding : 0 !default;
+$contentInnerBackground: $white !default;
+
+//Note: Applies copy variables from copy.scss
+
+.l-content{
+   @include background($contentBackground);
+   min-height:$contentHeight;
+   margin:$contentMargin;
+   padding:$contentPadding;
+   color:$content-copy-color;
+   @include clearfix;
+   padding: 0 5px;
+  .inner{
+      @include background($contentInnerBackground);
+      min-height:$contentInnerHeight;
+      margin:$contentInnerMargin;
+      padding:$contentInnerPadding;
+      @include clearfix;
+      .inner{
+        //Reset inner so that inners below this get a clean slate
+        margin:0;
+         
+        @include reset-container-spacing;
+        background:none;}
+   }
+ }
+
+
+
+
+
+.content-container{
+  max-width:1200px;
+  margin:0 auto;
+}

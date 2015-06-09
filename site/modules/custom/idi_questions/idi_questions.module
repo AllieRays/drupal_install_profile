@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Code for the IDI questions feature.
+ */
+
+/*include_once 'idi_questions.features.inc';
+include_once 'idi_questions.features.field_base.inc';
+include_once 'idi_questions.features.field_instance.inc';
+
+function idi_questions_load_fields(){
+    foreach(idi_questions_field_default_field_bases() as $field_base){
+        field_create_field($field_base);
+    }
+    foreach(idi_questions_field_default_field_instances() as $field_instance){
+        field_create_instance($field_instance);
+    }
+
+}
+*/

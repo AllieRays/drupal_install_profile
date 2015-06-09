@@ -1,0 +1,23 @@
+//Default styling for media at the atomic level
+
+img, media {
+  max-width: 100%;
+}
+
+.l-content{
+    img{
+      margin:$inline-content-margin;
+      float:$inline-content-float;
+      border:$inline-content-border;
+    }
+    .image{
+       margin:$inline-content-margin;
+       float:$inline-content-float;
+       border:$inline-content-border;
+       img{
+           border:none;
+           float:none;
+           margin:0;
+          }
+     }
+ }

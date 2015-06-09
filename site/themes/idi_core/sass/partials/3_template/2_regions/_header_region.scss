@@ -1,0 +1,34 @@
+//Note: Most header styling is controlled at the header wrapper level and this should rarely need to be altered from default
+
+$headerRegionHeight: auto;
+$headerRegionMargin: $regionMargin;
+$headerRegionPadding: $regionPadding;
+$headerRegionBackground: $regionBackground;
+$headerRegionInnerBackground:$regionInnerBackground;
+
+.l-region--header{
+  margin:$headerRegionMargin;
+  padding: $headerRegionPadding;
+  height: $headerRegionHeight;
+  @include background($headerRegionBackground);
+    .inner{
+      @include background($headerRegionInnerBackground);
+    }
+
+  .block{
+     width:auto;
+     float:left;
+  }
+
+  .block--search{
+    float:left;
+    width:auto;
+
+  }
+  .block--menu-menu-toolbar{
+    /*@include span-columns(4 omega, 8);  */
+    float:right;
+    padding-right:$gutter-width;
+
+  }
+}

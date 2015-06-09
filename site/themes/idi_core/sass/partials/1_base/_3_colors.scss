@@ -1,0 +1,59 @@
+// Color variables
+// Use name that color to provide meaningful names for color variables
+// http://chir.ag/projects/name-that-color/
+
+//Some grayscales that are used throughout (may be altered but should never be removed)
+$white : #ffffff;
+$white-medium: #f5f5f5;
+$lightGray : #ededed;
+$light-gray: #ededed;
+$middleGray : #CCCCCC;
+$darkMiddleGray: #999999;
+$darkGray : #333333;
+$gray-dark: #333333;
+$black : #000000;
+
+//Name some hex values specific to the site
+$idi-dark-blue: #1a3d73;
+$idiDarkBlue: $idi-dark-blue;
+$idiBlue: #25bdf0;
+$idi-blue: #25bdf0;
+$idiGreen: #bbd530;
+$idi-green: #bbd530;
+$idiOrange: #fcc317;
+$idiPink: #ec1e54;
+
+$copy-color: $middleGray;
+$header-color: $middleGray;
+$footer-color: $middleGray;
+$body-color: $light-gray;
+$body--background-color: $light-gray;
+$hover-color: $idiOrange;
+$input-color: $white-medium;
+$input-background: $white-medium;
+$error-background: #ffe9e9;
+$error-border: #f77f7f;
+$button-background-color: $idi-blue;
+$text-as-link: $copy-color;
+$text-as-link-hover: $hover-color;
+
+//Set some defaults (may be changed but should not be removed)
+$primary : $idiBlue; //Sites primary color
+$secondary : $idi-dark-blue; //Sites secondary color
+$accent : $idi-blue; //An accent color
+$additionalAccent : $idiGreen; //A second accent color
+$additionalAccentTwo : $idiOrange; //A third accent color
+//Text default colors
+$lightText: $middleGray; //For text on a dark BG
+$darkText : $darkGray; //For text on light BG
+$primary-hover-color: $hover-color;
+$link-color-default: $idi-dark-blue;
+$link-hover-default: $idiOrange;
+$primary-text:$lightText;
+$primary-text-hover:$additionalAccent;
+$banner-region-color: $gray-dark;
+$main-content-region-color: $light-gray;
+$bean-background-color: $light-gray;
+
+
+$navigationRegionBackground: $primary;

@@ -1,0 +1,15 @@
+$developmentRegionHeight: auto;
+$developmentRegionMargin: $regionMargin;
+$developmentRegionPadding: $regionPadding;
+$developmentRegionBackground: $regionBackground;
+$developmentRegionInnerBackground:$regionInnerBackground;
+
+.l-region--development{
+  margin:$developmentRegionMargin;
+  padding: $developmentRegionPadding;
+  height: $developmentRegionHeight;
+  @include background($developmentRegionBackground);
+    .inner{
+      @include background($developmentRegionInnerBackground);
+    }
+}

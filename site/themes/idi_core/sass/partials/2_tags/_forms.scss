@@ -1,0 +1,86 @@
+//Form and button default styling at the atomic level
+
+//Note: Work in progress
+
+//Button style variables
+$button-height : 40px;
+$button-padding : 0 20px;
+$button-margin: .5em 0;
+$button-font: normal #{16px}/#{$button-height} $button-font;
+$button-color: $white;
+$button-hover-color:$white;
+$button-background: $primary;
+$button-hover-background: $hover-color;
+$button-border-radius: $default-border-radius;
+
+
+.html input[type='text'], .html .form-text, .html .form-textarea{
+    outline: $default-border;
+    border:1px solid $white;
+    background-color: $input-color;
+    height:40px;
+    max-width:350px;
+    margin:5px 0;
+    text-indent:5px;
+    &:focus{
+      outline: 1px solid $gray-dark;  
+      border:none;
+    }
+}
+
+
+.form-required{
+    color:$darkGray;
+}
+
+#forward-form #edit-page,
+#forward-form #edit-subject,
+#forward-form #edit-body {
+    display: none;
+}
+
+.button, .submit{
+    //width:128px;
+   /* height:$button-height;
+    padding:$button-padding;
+    margin:$button-margin;
+    background:$button-background;
+    font:$button-font;
+    color:$button-color;
+    border-radius:$button-border-radius;
+    text-decoration:none;
+    border:none;
+    display:block;
+    appearance:none;
+    -moz-appearance:none; /* Firefox
+    -webkit-appearance:none; /* Safari and Chrome
+    min-width:115px; */
+    &:hover{
+      //  color:$button-hover-color;
+      //  background:$button-hover-background;
+      //  text-decoration:none;
+    }
+}
+
+.slide-button{
+    /*  width: 5.5em;
+      height: 20px;*/
+    width:101px;
+    white-space:nowrap;
+    padding: 8px 10px 8px 10px;
+    //margin-right:15px;
+    //margin-bottom:15px;
+    //margin-top:15px;
+    font : 600 12px $master-font;
+    color:white;
+    background:$middleGray;
+    border-radius:2px;
+    text-decoration:none;
+    position:relative!important;
+    display:inline-block;
+}
+
+
+.user-login .form-submit{
+    @extend .button;
+}

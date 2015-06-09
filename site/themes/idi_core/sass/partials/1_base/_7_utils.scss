@@ -1,0 +1,98 @@
+//Utilty classes
+//Should not contain mixins but can give class wrappers to mixins (Ie: .clearfix)
+
+//PLEASE GROW THIS PARTIAL!
+
+.clearfix {
+  @include clearfix;
+}
+
+.hidden{
+   display:none;
+}
+
+// There are two approaches to creating PIE elements
+// The default approach is to make the element position: relative.
+.pie-element {
+  // relative is the default, so passing relative
+  // is redundant, but we do it here for clarity.
+  @include pie-element(relative);
+}
+.pie-container {
+  @include pie-container;
+}
+.z-pie-element {
+  // this will get a z-index of 0, you can pass a z-index value if you want
+  @include pie-element(z-index);
+}
+
+
+.mobile-only{
+    display:block;
+    @include breakpoint($tab){
+       display:none;
+    }
+}
+.tablet-only{
+    display:none;
+    @include breakpoint($tab){
+       display:block;
+    }
+    @include breakpoint($desk){
+       display:none;
+    }
+}
+.desktop-only{
+    display:none;
+    @include breakpoint($desk){
+       display:block;
+    }
+}
+
+.center-horizontal{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.column-one{
+  padding: $mobile-padding;
+  @include span(4 of 4);
+  @include breakpoint($tab){
+    padding: $remove-mobile-padding;
+    @include span(5 of 10);
+  }
+}
+
+.column-two{
+  padding: $mobile-padding;
+  @include span(4 of 4);
+  @include breakpoint($tab){
+    color:white;
+    padding: $remove-mobile-padding;
+    @include span(last 5 of 10);
+
+  }
+}
+
+.no-animation{
+ transition:none;
+ -webkit-transition:none;
+ -o-transition:none;
+ -ms-transition:none;
+ -moz-transition:none;
+}
+
+
+.fa-home:before{
+  font-family:fontawesome;
+}

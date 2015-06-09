@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Ict basic page feature.
+ */
+
+include_once 'ict_basic_page.features.inc';

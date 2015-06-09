@@ -1,0 +1,84 @@
+<?php
+/**
+ * @file
+ * Sample Content to fill out icttemplate.
+ *
+ * implements enable and disable,
+ * and sample_content_custom_blocks
+ */
+//http://drupal.stackexchange.com/questions/29035/can-a-module-provide-a-default-block-with-editable-content-editable-through-th
+/*
+function sample_content_enable(){
+  foreach(sample_content_custom_blocks() as $b_info){
+  $bid = db_insert('block_custom')->fields(array(
+    'body' =>  $b_info['body'],
+    'info' => $b_info['info'],
+    'format' => $b_info['format'],
+
+  ))
+  ->execute();
+
+  $query = db_insert('block')->fields(array('visibility', 'pages', 'custom', 'title', 'module', 'theme', 'status', 'region', 'weight', 'delta', 'cache'));
+    $query->values(array(
+      'visibility' => 0, // visible
+      'pages' => '', // list of pages
+      'custom' => 1, // This is a custom block
+      'title' => $b_info['title'],
+      'module' => 'block', // The block module handles custom modules
+      'theme' => 'icttemplate',
+      'status' => 1,
+      'region' => $b_info['region'],
+      'weight' => $b_info['weight'],
+      'delta' => $bid,
+      'cache' => DRUPAL_NO_CACHE,
+    ));
+$query->execute();
+    }
+}
+
+function sample_content_disable(){
+    $result = db_select('block', 'a')
+        ->fields('a')
+        ->condition('delta', $bid, '=')
+        ->execute()
+        ->fetchAssoc();
+    $delta = $result['delta'];
+    db_delete('block')->condition('delta', $delta, '=')->execute();
+    db_delete('block_custom')->condition('delta', $delta, '=')->execute();
+}
+
+
+function sample_content_custom_blocks(){
+  $b_info = array(
+    'Footer Logo' => array(
+      'body' =>  t('logo'),
+      'info' => 'Footer Logo',
+      'title' => '<none>',
+      'format' => 'full_html',
+      'region' => 'footer',
+      'weight' => '0',
+      ),
+    'Footer Content' => array(
+      'body' =>  t('<a href="sitemap">Sitemap</a>') . t(' <a href="/privacy-policy">Privacy Policy</a> <br>') . t('Copyright ') . (date("Y")) . t('.') . t(' <a href="http://www.studywebsiteurl.com">studywebsiturl.com</a>') . t(' All rights reserved') ,
+      'info' => 'Footer Content',
+      'title' => '<none>',
+      'format' => 'full_html', // change to php suck it ankur
+      'region' => 'footer',
+      'weight' => '1',
+      ),
+  );
+  return $b_info;
+}
+
+
+
+function sample_content_help($path, $arg){
+    switch($path){
+        case 'admin/help#samplecontent' :{
+            $ret_val = '<h3>' . t('About') . '</h3>';
+            $ret_val .= '<p>' . t('This Sample Content modules creates a few sample nodes, blocks and beans for the icttemplate.') . '</p>';
+            return  $ret_val;
+            break;
+        }
+    }
+}*/

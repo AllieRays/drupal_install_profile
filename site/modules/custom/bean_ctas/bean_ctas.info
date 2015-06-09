@@ -1,0 +1,6 @@
+name = Bean Ctas
+description = Bean Blocks to link to internal nodes 
+core = 7.x
+package = Features
+dependencies[] = idi_bean_settings
+project = bean_ctas

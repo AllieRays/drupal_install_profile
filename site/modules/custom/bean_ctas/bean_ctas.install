@@ -1,0 +1,87 @@
+<?php
+/**
+ * @file
+ * Sample Bean Content to fill out icttemplate
+ */
+//http://www.pixelite.co.nz/article/how-use-entity-metadata-wrappers-drupal-7/
+
+function bean_ctas_install(){
+    //Enable the included features module that contains some field/content type configuration
+    if (!module_exists('idi_bean_settings')) {
+        $modules = array('idi_bean_settings');
+        module_enable($modules);
+    }
+
+   // bean_ctas_enable();
+}
+
+
+function bean_ctas_uninstall(){
+    //Disable the included features module that contains some field/content type configuration
+    if (module_exists('idi_bean_settings')) {
+        $modules = array('idi_bean_settings');
+        module_disable($modules);
+    }
+}
+
+
+
+function bean_ctas_enable(){
+    foreach(bean_ctas_info() as $bean_content){
+        $bean_ids = array();
+        $bean = bean_create(array('type' => 'block_cta'));
+        $bean_wrap = entity_metadata_wrapper('bean', $bean);
+        $bean_wrap->label->set($bean_content['label']);
+        $bean_wrap->title->set($bean_content['title']);
+        $bean_wrap->field_text->set(array(
+            'value' => ($bean_content['field_text']),
+            'format' => ('full_html'),
+            ));
+        $bean_wrap->field_link->set(array(
+            'url' => ($bean_content['link_url']),
+            'title' => 'Read More',
+                'attributes'=> array(
+                    'class' => ($bean_content['class']),
+                )
+        ));
+        $bean_wrap->save();
+        $bean_ids[] = $bean_wrap->bid->value();
+        //set variable to store bean ids
+        variable_set('bean_ctas_bean_ids', $bean_ids);
+    }
+}
+
+function bean_ctas_disable(){
+  $bids = variable_get('bean_ctas_bean_ids', array());
+    foreach($bids as $key => $bid){
+        $bean = bean_load($bid);
+        bean_delete($bean);
+    }
+}
+
+function bean_ctas_info(){
+    $bean_content = array(
+        'About The Study' => array(
+            'label' => 'About The Study',
+            'title' => 'About The Study',
+            'field_text' => '<p>' . t('Learn more about the study and what taking part involves.') . '</p>',
+            'link_url' => 'about-the-study',
+            'class' => '',
+        ),
+        'FAQs' => array(
+            'field_text' => '<p>' . t('View frequently asked questions about the study.') . '</p>',
+            'label' => 'FAQs',
+            'title' => 'FAQs',
+            'link_url' => 'faqs',
+            'class' => '',
+        ),
+        'See Who Can Take Part' => array(
+            'field_text' => '<p>' . t('Find out whether you or someone you care for can join the study') . '</p>',
+            'label' => 'See Who Can Take Part',
+            'title' => 'See Who Can Take Part',
+            'link_url' => 'who-can-take-part',
+            'class' => 'flip-button',
+        ),
+  );
+  return $bean_content;
+}

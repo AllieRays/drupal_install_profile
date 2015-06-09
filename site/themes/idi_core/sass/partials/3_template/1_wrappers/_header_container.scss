@@ -1,0 +1,71 @@
+//Set variables for the header wrapper
+//Note that this is NOT the footer region and may wrap multiple regions
+$header-height : 60px !default;
+$header-height-tab: 80px !default;
+$headerMargin : 0 !default;
+$headerPadding: 0 !default;
+$headerBackground : $header-color !default;
+$headerInnerHeight : 80px !default;
+$headerInnerBackground : none !default;
+$header-inner-margin: $headerMargin;
+
+//Set default block behavior within this region
+$headerBlockMargin: 0 $horz-spacing-unit 0 0;
+$headerBlockPadding: 0;
+$headerBlockBorder: none;
+$headerBlockFloat: right;
+$headerBlockBackground: none;
+
+.l-header{
+   @include background($headerBackground);
+   min-height:$header-height;
+   margin:$headerMargin;
+   padding:$headerPadding;
+   width:100%;
+   @include clearfix;
+    @include breakpoint($tab){
+      min-height:$header-height-tab;
+    }
+  .inner{
+      @include background($headerInnerBackground);
+      min-height:$header-height;
+      margin:$header-inner-margin;
+      max-width:$container-width;
+      position:relative;
+      @include clearfix;
+      @include breakpoint($tab){
+        min-height:$header-height-tab;
+      }
+      .inner{
+          //Resetting inner so that it doesn't inheiret from the main wrapper
+          margin:0;
+
+          @include reset-container-spacing;
+          background:none;
+        }
+   }
+  .l-region{
+        //Set default region behavior to reset/collapse
+
+        @include reset-container-spacing;
+        background:none;
+        .block{
+          //Set default block behavoir within footer regions (again collapsing)
+          float:$headerBlockFloat;
+          margin:$headerBlockMargin;
+          padding:$headerBlockPadding;
+          border:$headerBlockBorder;
+          @include background($headerBlockBackground);
+        }
+
+   }
+   .l-branding{
+          //Override defaults for branding region only
+        @extend .center;
+        padding: 0 4px;
+        a{
+        overflow:hidden;
+        display:block;
+        }
+   }
+ }

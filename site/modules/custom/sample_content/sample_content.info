@@ -1,0 +1,3 @@
+name = sample_content
+description = Sample content for icttemplate install
+core = 7.x

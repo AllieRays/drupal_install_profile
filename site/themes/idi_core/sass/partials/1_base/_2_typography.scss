@@ -1,0 +1,69 @@
+// Font faces, stacks and sizes.
+
+// Compass' vertical_rhythm extension is a powerful tool to set up a vertical
+// rhythm for your entire page. You can see some of its mixins and functions in
+// use in the normalize.scss file.
+// @see http://compass-style.org/reference/compass/typography/vertical_rhythm/
+
+//Font Hackery
+//Set default font base for EM scaling
+$fontBase: 16;
+
+@function em($pixels, $context: $fontBase) { //Function needs to be here because mixins has not yet been included
+  @return $pixels/$context * 1em;
+}
+
+$base-font-size: em(12); // The font size set on the root html element.
+$base-line-height: em(18); // This line-height determines the basic unit of vertical rhythm.
+
+// The amount lists, blockquotes and comments are indented.
+$indent-amount: em(20);
+
+//Some margin presets
+$normal-margin: .5em 0;
+$big-margin: 1em 0;
+$small-margin: .25em 0;
+$bottom-margin: 0 0 .5em 0;
+$top-margin: .5em 0 0 0;
+$full-margin: .5em;
+$full-large-margin: 1em;
+$li-margin: .1em 0;
+$headline-margin: 1em 0 .5em 0;
+
+//Font loading mixin
+@mixin load-font($font-dir, $font-folder, $font-name){
+  @font-face {
+      font-family: 'blackJack';
+      src: url('#{$font-dir}/#{$font-folder}/#{$font-name}.eot');
+      src: url('#{$font-dir}/#{$font-folder}/#{$font-name}.woff') format('woff'),
+           url('#{$font-dir}/#{$font-folder}/#{$font-name}.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+  }
+}
+
+//Load External Fonts
+//@include load-font('../libraries/_fonts', 'blackJack', 'blackJack');
+
+//Default font stacks
+$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
+$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
+$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
+$helvetica:       "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$openSans:        'Open Sans', Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+$font-awesome:     FontAwesome;
+//External/Custom font stacks
+$blackJack: '#$font-name', Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+//Default font declarations
+$base-font-family: $arial; // The font family set on the html element.
+$master-font: $base-font-family; //The font family set on content wrappers
+$headline-font: $georgia; //The font family for most headlines
+$button-font: $master-font; //The font to be used for buttons (master is default)
+$accent-font: $master-font; //Accent lines font (master is default)
+$font-monospace: $courier; //In case we need to monospace anything
+$content-font: $base-font-family;

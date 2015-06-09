@@ -1,0 +1,15 @@
+# We absolutely don't want to have the .sass-cache in git.
+.sass-cache
+nbproject
+
+# Ignore the node modules folder (created by 'npm install').
+node_modules
+
+/web/sites/*/files/styles/*
+/web/sites/*/files/css/*
+
+.svn
+.bundle/
+Gemfile.lock
+
+.idea

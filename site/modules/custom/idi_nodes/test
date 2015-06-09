@@ -1,0 +1,154 @@
+<?php
+/**
+ * @file
+ * Sample Content to fill out icttemplate.
+ *
+ * implements enable and disable,
+ * and sample_content_custom_blocks
+ */
+//http://drupal.stackexchange.com/questions/29035/can-a-module-provide-a-default-block-with-editable-content-editable-through-th
+
+function sample_content_enable(){
+  foreach(sample_content_custom_blocks() as $b_info){
+  $bid = db_insert('block_custom')
+  ->fields(array(
+    'body' =>  $b_info['body'],
+    'info' => $b_info['info'],
+    'format' => $b_info['format'],
+  ))
+  ->execute();
+
+  $query = db_insert('block')->fields(array('visibility', 'pages', 'custom', 'title', 'module', 'theme', 'status', 'region', 'weight', 'delta', 'cache'));
+    $query->values(array(
+      'visibility' => 0, // visible
+      'pages' => '', // list of pages
+      'custom' => 1, // This is a custom block
+      'title' => $b_info['title'],
+      'module' => 'block', // The block module handles custom modules
+      'theme' => 'icttemplate',
+      'status' => 1,
+      'region' => $b_info['region'],
+      'weight' => $b_info['weight'],
+      'delta' => $bid,
+      'cache' => DRUPAL_NO_CACHE,
+    ));
+$query->execute();
+}
+}
+
+function sample_content_custom_blocks(){
+  $b_info = array(
+    'Footer Logo' => array(
+      'body' =>  t('logo'),
+      'info' => 'Footer Logo',
+      'title' => '<none>',
+      'format' => 'full_html',
+      'region' => 'footer',
+      'weight' => '0',
+      ),
+    'Footer Content' => array(
+      'body' =>  t('<a href="/front">Sitemap</a>') . t(' <a href="/privacy-policy">Privacy Policy</a> <br>') . t('Copyright ') . (date("Y")) . t('.') . t(' <a href="http://www.studywebsiteurl.com">studywebsiturl.com</a>') . t(' All rights reserved') ,
+      'info' => 'Footer Content',
+      'title' => '<none>',
+      'format' => 'full_html', // change to php suck it ankur
+      'region' => 'footer',
+      'weight' => '1',
+      ),
+      'About The Study' => array(
+          'body' =>  t('<p>Learn more about the study and what taking part involves. </p><a href="#" class="button"> Read More</a>') ,
+          'info' => 'About The Study',
+          'title' => 'About The Study',
+          'format' => 'full_html',
+          'region' => 'sidebar_second',
+          'weight' => '3',
+      ),
+      'FAQs' => array(
+          'body' =>  t('<p>View frequently asked questions about the study. </p><a href="#" class="button"> Read More</a>') ,
+          'info' => 'FAQs',
+          'title' => 'FAQs',
+          'format' => 'full_html',
+          'region' => 'sidebar_second',
+          'weight' => '3',
+      ),
+  );
+  return $b_info;
+}
+
+function sample_content__disable(){
+    $result = db_select('block', 'a')
+        ->fields('a')
+        ->condition('delta', $bid, '=')
+        ->execute()
+        ->fetchAssoc();
+    $delta = $result['delta'];
+    db_delete('block')->condition('delta', $delta, '=')->execute();
+    db_delete('custom_block')->condition('delta', $delta, '=')->execute();
+}
+
+
+function sample_content_help($path, $arg){
+    switch($path){
+        case 'admin/help#samplecontent' :{
+            $ret_val = '<h3>' . t('About') . '</h3>';
+            $ret_val .= '<p>' . t('This Sample Content modules creates a few sample nodes, blocks and beans for the icttemplate.') . '</p>';
+            return  $ret_val;
+            break;
+        }
+    }
+}
+
+
+
+function idi_default_beans_block_info_alter(&$blocks, $theme, $code_blocks) {
+    // Disable the login block.
+    //$blocks['the_module']['the_delta']['region'] = -1;
+    $blocks['bean']['footer-content']['region'] = 'footer';
+}
+//function idi_default_beans_block_info_alter(&$blocks, $theme, $code_blocks) {
+
+//    $blocks['bean']['footer-content']['region'] = 'footer-content';
+ /*   $blocks = array();
+    $blocks['footer-content'] = array(
+        'info' => t('Footer Content'),
+        'status' => 1,
+        'region' => 'footer',
+        'visibility' => BLOCK_VISIBILITY_LISTED,
+        'pages' => '',
+    );
+    return $blocks;
+    /*foreach (idi_default_beans_info() as $bean_content) {
+        $blocks = array();
+        $block_name = $bean_content['label'];
+
+        $blocks[$block_name] = array(
+            'info' => $bean_content['label'],
+            'status' => 1,
+            'region' => $bean_content['region'],
+            'visibility' => BLOCK_VISIBILITY_LISTED,
+            'pages' => '',
+        );
+        foreach ($blocks as $block) {
+            return $block;
+        }
+    }*/
+//}
+function idi_default_beans_block_info() {
+    $blocks = &drupal_static(__FUNCTION__, array());
+
+    if (!empty($blocks)) {
+        return $blocks;
+    }
+
+    $blocks = array();
+    $beans = bean_get_all_beans();
+    foreach ($beans as $bean) {
+        $blocks[$bean->delta] = array(
+            'info' => $bean->adminTitle(),
+            'cache' => $bean->getInfo('cache_level'),
+            'region' => $bean->getInfo('region'),
+        );
+    }
+
+    return $blocks;
+}
+

@@ -1,0 +1,58 @@
+//Default list styling at the atomic level (some molecular because lists)
+
+//@extend .graphical-bullets and .no-bullets for easy custom lists
+//Also see menus/_defaults.scss for more extendable list styles designed specifically to craft menus
+
+//List spacing (uses global font/line)
+$list-indent: em(20);
+$list-margin: $normal-margin;
+$li-margin: .1em 0;
+$bulletBackground: url(../images/bg_bullet.png) 0px 11px no-repeat;
+
+//LIST STYLES
+ul, ol{
+   list-style-position: outside;
+   margin-left: $list-indent;
+   margin: $list-margin;
+   font-family: $content-font;
+   font-weight: $content-font-weight;
+   font-size: $content-font-size;
+   line-height: $content-line-height;
+  li{
+      margin: $li-margin;
+    }
+}
+ul, ol{
+   list-style-position:outside;
+   margin-left:default-text-shadow;
+    margin:$normal-margin;
+   font:default-text-shadow;
+
+  li{
+      margin:$li-margin;
+    }
+}
+ul.graphical-bullets{
+    list-style-position:outside;
+    list-style:none;
+    margin-left:default-text-shadow;
+    margin:$normal-margin;
+
+    li{
+        list-style: none;
+        font:default-text-shadow;
+        @include background($bulletBackground);
+        margin:$li-margin;
+    }
+}
+
+ul.no-bullets{
+    list-style-position:outside;
+    list-style-type:none;
+    margin-left:default-text-shadow;
+    li{
+       font:default-text-shadow;
+       margin:$li-margin;
+       background:none;
+    }
+}

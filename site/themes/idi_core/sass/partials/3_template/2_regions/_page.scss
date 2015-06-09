@@ -1,0 +1,11 @@
+.l-page{
+   width:100%;
+   margin: 0 auto;
+}
+
+
+
+//.l-header, .l-region, .panel-panel, .l-footer {
+*{
+  @include transition-all;
+}

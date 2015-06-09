@@ -1,0 +1,8 @@
+//Default Bean Styling
+
+//Whenever you create a new Bean type it should get a new partial
+
+
+.block.block--bean, .block{
+  @include background($bean-background-color);
+}

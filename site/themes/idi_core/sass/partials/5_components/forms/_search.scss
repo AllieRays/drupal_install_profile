@@ -1,0 +1,185 @@
+//Search Block
+//See bottom of partial for alternate layout!
+
+//Block Level dimensions
+$searchWidth : 250px;
+$searchHeight : 30px;
+$searchMargin : 0;
+$searchPadding : 0;
+$searchFloat : right;
+$searchBoxFont: normal #{em(15)}/#{$searchHeight} $master-font;
+$searchBoxWidth : 220px;
+$searchBoxHeight : $searchHeight;
+$searchGap: 0px;
+
+//Form styling
+$searchBoxBorder: none;
+$searchSubmitWidth: $searchWidth - $searchBoxWidth;
+$searchSubmitHeight: $searchHeight;
+$searchBoxBackground: $lightGray;
+$searchBoxColor: $darkText;
+$searchSubmitBackground: url('../images/ico_search.png') center center no-repeat $additionalAccent;
+$searchSubmitHoverBackground: url('../images/ico_search.png') center center no-repeat $accent;
+
+//Responsive styles
+$sidrSearchWidth : $searchWidth;
+$sidrSearchHeight : $searchHeight;
+$sidrSearchMargin : $vert-spacing-unit auto;
+$sidrSearchPadding : $searchPadding;
+$sidrSearchFloat : none;
+
+$sidrSearchBoxWidth : $searchBoxWidth;
+$sidrSearchBoxHeight : $sidrSearchHeight;
+
+$sidrSearchBoxBorder: $searchBoxBorder;
+$sidrSearchSubmitWidth: $sidrSearchWidth - $sidrSearchBoxWidth;
+$sidrSearchSubmitHeight: $sidrSearchHeight;
+$sidrSearchGap: 0px;
+
+//Button to the right style
+#block-search-form { /* "Search form" block */
+     display:none;
+     width:$searchWidth;
+     height:$searchHeight;
+     margin-:$searchMargin;
+     float:$searchFloat;
+     position:relative;
+     @include clearfix;
+     form#search-block-form{
+       @include reset-container-spacing;
+     }
+     h2{}
+     .form-item-search-block-form{
+       //width:220px;
+       //height:30px;
+       //float:left;
+
+       //SEARCH BOX
+       #edit-search-block-form--2{
+         width:$searchBoxWidth;
+         height:$searchBoxHeight;
+         background:$searchBoxBackground;
+         font: $searchBoxFont;
+         color:$searchBoxColor;
+         border:$searchBoxBorder;
+         border-radius:4px 0px 0px 4px;
+         text-indent:10px;
+         padding:0;
+         float:left;
+         @include pie-element(relative);
+       }
+     }
+     //SEARCH SUBMIT
+     .form-actions{
+       float:left;
+       width:$searchSubmitWidth;
+       height:$searchSubmitHeight;
+       padding:0;
+       margin-left:$searchGap;
+       input#edit-submit, .form-submit{
+         padding:0;
+         margin:0;
+         width:100%;
+         height:100%;
+         @include background($searchSubmitBackground);
+         text-indent:1000%;
+         overflow:hidden;
+         border-radius:0px 4px 4px 0px;
+         @include pie-element(relative);
+         border:none;
+         &:hover{
+           @include background($searchSubmitHoverBackground);
+         }
+       }
+     }
+     @include breakpoint($tab) {
+       display:block;
+     }
+
+
+   }
+
+#resp-nav{
+
+    #block-search-form{
+        height:$sidrSearchHeight;
+        line-height:$sidrSearchHeight;
+        width:$sidrSearchWidth;
+        margin:$sidrSearchMargin;
+        float:none;
+      form#search-block-form{
+
+        .form-type-textfield{
+          float:left;
+            width:$sidrSearchBoxWidth;
+            height:$sidrSearchBoxHeight;
+            #edit-search-block-form--2{
+             width:$sidrSearchBoxWidth;
+             height:$sidrSearchBoxHeight;
+
+           }
+         }
+         .form-actions{
+            margin-left:$searchGap;
+            float:left;
+            width:$sidrSearchSubmitWidth;
+            height:$sidrSearchSubmitHeight;
+            line-height:$sidrSearchSubmitHeight;
+            input.form-submit{
+              width:$sidrSearchSubmitWidth;
+              height:$sidrSearchSubmitHeight;
+            }
+
+
+          }
+      }
+
+
+    }
+
+}
+
+//Turn into button overlay style
+/*
+  #block-search-form{
+
+      form#search-block-form{
+        position:relative;
+        .form-type-textfield{
+            width:$searchBoxWidth + $searchSubmitWidth + $searchGap;
+            #edit-search-block-form--2{
+              border-radius: 4px;
+              width:$searchBoxWidth + $searchSubmitWidth;
+              text-indent:10px + $searchSubmitWidth;
+           }
+         }
+         .form-actions{
+            position:absolute;
+            top:0;
+            left:0;
+            input.form-submit{
+              border-radius: 4px 0px 0px 4px;
+            }
+
+
+          }
+      }
+
+}
+
+#resp-nav #block-search-form{
+
+      form#search-block-form{
+        .form-type-textfield{
+            width:$sidrSearchBoxWidth + $sidrSearchSubmitWidth + $sidrSearchGap;
+            #edit-search-block-form--2{
+              width:$sidrSearchBoxWidth + $sidrSearchSubmitWidth + $sidrSearchGap;
+              text-indent:10px + $sidrSearchSubmitWidth;
+           }
+         }
+         .form-actions{
+            input.form-submit{
+            }
+          }
+      }
+}*/

@@ -1,0 +1,120 @@
+//Variables that need to be accessed globally (step 2 and below) should be placed here.
+
+
+/*******************************************************************************
+  Grid Settings
+******************************************************************************/
+$border-box : true !default;
+
+// Susy Variables (Must be set here so that they can be leveraged in Components and Elsewhere)
+// Set consistent vertical and horizontal spacing units.
+$vert-spacing-unit: 10px;
+$horz-spacing-unit: 1em;
+
+// Define Susy grid variables mobile first.
+$total-columns: 3;
+//$column-width: 4em;
+$gutter-width: .25;
+$grid-padding: 5px;
+
+$container-style: magic;
+$container-width: 1200px;
+
+// Breakpoints see http://breakpoint-sass.com/ for more
+$t-mobile: 40em;    // for smaller screen sizes 
+$tab: 50em;         // A Tablet viewport
+$t-desk: 60em;      // Inbetween Tab and desktop
+$desk: 70em;        // Desk
+$mega-desk: 75em;   //largest viewport and beyond
+
+
+// Legacy support.
+$legacy-support-for-ie6: false;
+$legacy-support-for-ie7: true;
+$legacy-support-for-ie8: true;
+
+$debug-grid: true !default;
+
+/*******************************************************************************
+  Layout Defaults
+******************************************************************************/
+
+//Defaults
+$defaultBorderRadius : 0;
+$default-border:1px solid $primary;
+$defaultFloat: left;
+
+//Default Content spacing
+$inline-content-float: $defaultFloat;
+$inline-content-margin: $full-large-margin;
+$inline-content-border: none;
+
+//Region Default Vars
+$regionMargin : 0 !default;
+$regionPadding : 0 !default;
+$regionBackground: none !default;
+$regionInnerBackground: none !default;
+
+//Block Default Vars
+$blockMargin : 0  0 20px 0!default;
+$blockPadding : 20px !default;
+$blockBackground: $white !default;
+
+//Default Vars for Menu Blocks (overrides block defaults)
+$menuBlockMargin : 0  0 20px 0!default;
+$menuBlockPadding : 0 !default;
+$menuBlockBackground: none !default;
+
+//l-page //are these used???
+$menuHeight : 50px !default;
+$menuMargin : 0 !default;
+$menuPadding: 0 !default;
+
+//are these used???
+$headerMargin : 0 !default;
+$headerPadding: 0 !default;
+
+$mobile-padding: 0 10px;
+$remove-mobile-padding: 0;
+
+
+//https://github.com/ericam/susy/issues/425
+//deprecated sass warning must run before susy configurations 
+@mixin box-sizing($box-model: $default-box-sizing) {
+  @if type-of($box-model) == string {
+    $box-model: unquote($box-model);
+  }
+  @include prefixed-properties(css3-boxsizing, $box-sizing-support-threshold, (box-sizing: $box-model));
+}
+
+//susy mapping for susy 3.0
+// to read more http://susy.readthedocs.org/en/latest/settings/
+$susy: (
+  flow: ltr,
+  math: fluid,
+  output: float,
+  gutter-position: after,
+  container: $container-width,
+  container-position: center,
+  columns: $total-columns,
+  gutters: $gutter-width,
+  column-width: false,
+  global-box-sizing: content-box,
+  last-flow: to,
+  debug: (
+    image: hide,
+    color: rgba(#66f, .25),
+    output: background,
+    toggle: top right,
+  ),
+  use-custom: (
+    background-image: true,
+    background-options: false,
+    box-sizing: false,
+    clearfix: false,
+    rem: true,
+  )
+);
+
+
+

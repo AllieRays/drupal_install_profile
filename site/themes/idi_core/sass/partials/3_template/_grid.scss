@@ -1,0 +1,234 @@
+/*******************************************************************************
+  * Main grid file (Susy 1)
+  * Leverages default grid settings from vars.scss (they are required throughout the site)
+  * Note: should NEVER contain anything but grid declarations, there are individual partials for all of these regions and wrappers!
+******************************************************************************/
+
+//useful mixins
+//   //resets the grid assignment of a given element
+//@include remove-last;  //removes last declaration from a given element
+
+//Set the typical top level containers (header, main and footer)
+.l-header,
+.l-main,
+.l-footer {
+    @include clearfix; //Make all the main containers clear each other
+
+  .inner{
+    @include container; //Declare to be a grid container
+    @include grid-background; // Show the columns for debugging.
+  }
+}
+//Any overrides for main
+.l-main{
+   //Page may be used in alternate grid schemes but is not leveraged here
+  .l-page{
+    //@include set-container-width;
+  }
+}
+
+/*******************************************************************************
+  MOBILE
+******************************************************************************/
+
+//Set regions
+.l-region--header{
+  //Header region is inline and does not need to be grided
+  //@include span(last 3 of 3); // Span the last (last) 6 columns of 9.
+}
+.l-region--footer{
+  //Footer region is inline and does not need to be grided
+  //@include span(last 3 of 3); // Span the last (last) 6 columns of 9.
+}
+.l-region--banner{
+  @include span(last 3 of 3); // Span the last (last) 3 columns of 3.
+}
+.l-region--navigation {
+  @include span(last 3 of 3); // Span the last (last) 3 columns of 3.
+}
+.l-region--highlighted,
+.l-region--help,
+.l-content {
+  @include span(last 3 of 3); // Span the last (last) 3 columns of 3.
+}
+//Set regions within context of the various sidebar wrappers (generally no difference on mobile)
+.sidebar-first,
+.sidebar-second,
+.two-sidebars {
+  .l-content {
+    @include span(last 3 of 3); // Span the last (last) 3 columns of 3.
+  }
+  .l-region--sidebar-first,
+  .l-region--sidebar-second {
+    @include span(last 3 of 3); // Span the last (last) 3 columns of 3.
+  }
+  .l-region--sidebar-second {
+
+  }
+}
+
+/*******************************************************************************
+  Tablet (overrides mobile)
+******************************************************************************/
+
+//Alter the containers if necessary
+@include breakpoint($tab) { // At a given Susy Media Layout, use a given amount of columns.
+  .l-header,
+  .l-main,
+  .l-footer {
+    .inner{
+    // @include set-container-width; // Reset only the container width (elements have already been declared as containers).
+     @include grid-background; // Show the columns for debugging.
+    }
+  }
+  //Any overrides for main
+  .l-main{
+     //Page may be used in alternate grid schemes but is not leveraged here
+    .l-page{}
+  }
+  //Set regions
+  .l-region--header{
+     //Header region is inline and does not need to be grided
+     //@include span(last 9 of 9); // Span 9 out of 9 columns.
+  }
+  .l-region--footer{
+     //Footer region is inline and does not need to be grided
+     //@include span(last 9 of 9); // Span 9 out of 9 columns.
+  }
+  .l-region--banner{
+    @include span(last 9 of 9); // Span 9 out of 9 columns.
+  }
+  .l-region--navigation {
+    @include span(last 9 of 9); // Span 9 out of 9 columns.
+  }
+  .l-content {
+    @include span(last 9 of 9); // Span 9 out of 9 columns.
+  }
+
+  //Set regions within context of the various sidebar wrappers
+  //Layout when left sidebar is present
+  .sidebar-first{
+    .l-content{
+      @include span(last 6 of 9); // Span the last (last) 6 out of 9 columns.
+    }
+    .l-region--sidebar-first{
+      @include span(3 of 9); // Span 3 out of 9 columns.
+    }
+  }
+  //Layout when right sidebar is present
+  .sidebar-second{
+    .l-content {
+      @include span(6 of 9); // Span 6 out of 9 columns.
+    }
+    .l-region--sidebar-second {
+      @include span(last 3 of 9); //Span last (last) 3 columns out of 9 columns
+    }
+  }
+  //Layout when both sidebars are present
+  .two-sidebars {
+    .l-content {
+      @include span(3 of 9); // Span 3 out of 9 columns.
+      @include push(3 of 9); // Shift 3 columns
+    }
+    .l-region--sidebar-first{
+      @include span(3 of 9); // Span the first 3 out of 9 columns.
+    }
+    .l-region--sidebar-second {
+      @include span(last 3 of 9); // Span the last (last) 3 out of 9 columns.
+    }
+  }
+}
+
+/*******************************************************************************
+  Desktop (overrides mobile & tablet)
+******************************************************************************/
+
+//Alter the containers if necessary
+@include breakpoint($desk) {
+  .l-header,
+  .l-main,
+  .l-footer {
+    .inner{
+  //    @include set-container-width; // Reset only the container width (elements have already been declared as containers).
+      @include grid-background; // Show the columns for debugging.
+    }
+  }
+
+  //Any overrides for main
+  .l-main{
+     //Page may be used in alternate grid schemes but is not leveraged here
+    .l-page{}
+  }
+
+  //Set regions
+  .l-region--header{
+    //Header region is inline and does not need to be grided
+    //@include span(last 12 of 12); // Span the last (last) 12 columns of 12.
+  }
+  .l-region--footer{
+    //Footer region is inline and does not need to be grided
+    //@include span(last 12 of 12); // Span the last (last) 12 columns of 12.
+  }
+  .l-region--banner{
+    @include span(last 12 of 12); // Span the last (last) 12 columns of 12.
+  }
+
+  .l-region--navigation {
+    @include span(last 12 of 12); // Span the last (last) 12 columns of 12.
+  }
+  .l-content {
+    @include span(last 12 of 12); // Span the last (last) 12 columns of 12.
+  }
+
+  //Set regions within context of the various sidebar wrappers
+
+  //Layout when left sidebar is present
+  .sidebar-first {
+    .l-content {
+      @include span(last 9 of 12); // Span the last (last) 9 columns of 12.
+    }
+    .l-region--sidebar-first {
+      @include span(3 of 12); // Span 3 out of 12 columns.
+    }
+  }
+
+
+
+
+
+
+  //Layout when right sidebar is present
+  .sidebar-second {
+    .l-content {
+      @include span(8 of 12); // Span 6 out of 12 columns.
+     // @include push(3 of 12); //Shift 3 columns
+    }
+    .l-region--sidebar-second {
+      @include span(last 4 of 12); // Span the last (last) 3 columns of 12.
+    }
+  }
+
+
+
+
+
+
+  //Layout when both sidebars are present
+  .two-sidebars {
+    .l-content {
+      @include span(6 of 12); // Span 6 out of 12 columns.
+      @include push(3 of 12);  // Push element by adding 3 out of 12 columns of left margin.
+    }
+    .l-region--sidebar-first,
+    .l-region--sidebar-second {
+      @include span(3 of 12); // Span 3 out of 12 columns
+    }
+    .l-region--sidebar-first {
+      @include pull(9 of 12); // Pull element by adding 9 out of 12 columns of negative left margin.
+    }
+    .l-region--sidebar-second {
+      @include last; // This element spans the last (last) column.
+    }
+  }
+}
+

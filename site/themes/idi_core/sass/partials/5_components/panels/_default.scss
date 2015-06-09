@@ -1,0 +1,28 @@
+//Default Panel Styling
+
+//Whenever you create a new static panel it should get a new partial
+
+
+.panels-ipe-startedit.panels-ipe-pseudobutton, .panels-ipe-change-layout.panels-ipe-pseudobutton{
+  line-height: 3em;
+}
+
+
+
+h2.pane-title{
+  margin-top:0;
+}
+
+.pane-block, .field--name-body{
+  margin-bottom:35px;
+}
+
+.bryant-flipped-content-inner{
+  padding: 0 10px;
+  @include breakpoint($desk){
+    margin-right: 60px;
+  }
+}
+
+
+//cache_class_cache_ctools_css

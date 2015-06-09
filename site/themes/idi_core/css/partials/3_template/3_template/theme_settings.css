@@ -1,0 +1,8 @@
+#edit-colors .form-type-textfield {
+  display: inline-block;
+  max-width: 100px;
+  margin: 20px;
+}
+#edit-colors .form-submit {
+  display: block;
+}

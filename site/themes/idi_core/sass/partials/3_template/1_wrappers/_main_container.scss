@@ -1,0 +1,32 @@
+//Main wrapper styling
+$mainHeight: auto !default;
+$mainMargin : 0 !default;
+$mainPadding : 0 !default;
+$mainBackground : $body-color !default;
+$mainInnerHeight: auto !default;
+$mainInnerMargin :  0 auto !default;
+$mainInnerPadding : 0 !default;
+$mainInnerBackground : $regionInnerBackground !default;
+
+.l-main{
+   background:$mainBackground;
+   min-height:$mainHeight;
+   margin:$mainMargin;
+   padding:$mainPadding;
+   width:100%;
+   @include clearfix;
+  .inner{
+      background:$mainInnerBackground;
+      min-height:$mainInnerHeight;
+      margin:$mainInnerMargin;
+      padding:$mainInnerPadding;
+      max-width:$container-width;
+      @include clearfix;
+      .inner{
+        //Reset inner so that inners below this get a clean slate
+        margin:0;
+         
+        @include reset-container-spacing;
+        background:none;}
+   }
+ }

@@ -1,0 +1,188 @@
+//Mixins to be shared globally (including vars.scss and all partials step 2 and below)
+
+$pie-behavior: url("/sites/all/libraries/pie/PIE.php");
+// It is suggested that you use Sass's @extend directive to apply the PIE
+// behavior to your elements. Setting this variable will tell the `pie` mixin
+// to extend it. Or you can just extend the base class yourself.
+$pie-base-class: pie-element;
+
+@mixin bgSizeBehavior{
+    -ms-behavior: url("/sites/all/libraries/backgroundsize/backgroundsize.min.htc");
+}
+
+@mixin font-size($org) {
+    font-size: $org + px;
+    font-size: ($org/16) + rem;
+}
+@mixin pie-element($selector){}
+@mixin pie-container{}
+
+//Animation mixins
+
+@mixin keyframes($name) {
+
+    @-webkit-keyframes #{$name} { @content; }
+    @-moz-keyframes #{$name} { @content; }
+    @keyframes #{$name} { @content; }
+}
+
+@mixin animate($command) {
+    animation: $command;
+    -moz-animation: $command; /* Firefox */
+    -webkit-animation: $command; /* Safari and Chrome */
+    -o-animation: $command; /* Opera */
+
+}
+@mixin transition-all{
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+}
+
+@mixin transitionBgColor{
+    -webkit-transition: background-color 0.30s ease-in-out;
+    -moz-transition: background-color 0.30s ease-in-out;
+    -o-transition: background-color 0.30s ease-in-out;
+    transition: background-color 0.30s ease-in-out;
+}
+//Hide text inside of element
+@mixin bgtrick() {
+
+    overflow:hidden;
+    text-indent:100%;
+}
+// resets nested inner tags to default
+@mixin resetInner{
+    width:auto;
+    max-width:none;
+    min-width:0;
+    margin:0;
+    position:static;
+}
+
+//Toggle border box on
+@mixin borderBox{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+//Toggle border box off
+@mixin contentBox{
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+@mixin nested-container{
+    padding-left:0;
+    padding-right:0;
+
+}
+@mixin fitcontent{
+    display:block;
+    overflow:hidden;
+}
+
+@mixin reset-container-spacing{
+    margin:0;
+    padding:0;
+}
+@mixin plain-list{
+    list-style-position:outside;
+    list-style-type:none;
+    list-style-image:none;
+}
+
+
+@mixin outline-border{
+    outline: 1px solid $lightGray;
+}
+
+@mixin default-text-shadow{
+    text-shadow: 1px 1px 2px $darkGray;
+}
+
+
+@mixin button{
+    background:$secondary;
+    color:$white;
+    border-radius:4px;
+    padding:5px 10px;
+    border:none;
+    &:hover{
+        background:$accent;
+    }
+}
+
+@mixin grid-background {
+    @if $debug-grid == true {
+        //  @include susy-grid-background;
+    }
+}
+
+%text-invisible {
+    text-indent: -999em;
+}
+
+%container {
+    @include container;
+    @include grid-background;
+}
+
+@mixin slide-wrap {
+    height:100%;
+    width:100%;
+    z-index:0;
+    top:0;
+    left:0;
+}
+
+@mixin backgroundCover{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    @include backgroundBehavior;
+}
+@mixin backgroundBehavior{
+    //-ms-behavior: url("/sites/all/libraries/backgroundsize/backgroundsize.min.htc");
+}
+@mixin box-shadow{
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(130, 130, 130, 0.3);
+    -moz-box-shadow:    0px 0px 5px 0px rgba(130, 130, 130, 0.3);
+    box-shadow:         0px 0px 5px 0px rgba(130, 130, 130, 0.3);
+    @include pie-element(relative);
+}
+
+
+@mixin margin-auto{
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.container-auto{
+    width:$container-width;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.fa-icon{
+    position:absolute;
+    top:12px;
+    left:5px;
+    font-size:20px;
+    font-family: FontAwesome;   
+}
+
+.text-as-link{
+    color:$text-as-link;
+    font-weight:bold;
+    text-decoration:none;
+    &:hover{
+        color:$text-as-link-hover;
+        text-decoration:underline;
+    }
+}

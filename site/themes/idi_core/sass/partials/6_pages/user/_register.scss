@@ -1,0 +1,53 @@
+.not-logged-in.page-user.page-user-register{
+    .l-content{
+        float:left;
+        width:760px;
+        border:none;
+        background:none;
+        .inner{
+            width:700px;  
+        }
+
+    }
+
+
+
+    .form-item label{
+        font-weight:normal;
+    }
+
+    .user-info-from-cookie.user-register-form{
+        width:700px;
+    }
+
+    .form-item-pass .password-field, .form-item-pass input.password-confirm{
+        min-width:330px;
+    }
+}
+
+
+.form-type-select {
+    width:330px;
+    overflow:hidden;
+
+    .form-select{
+        min-width:344px;
+        border-radius:0;
+        height:37px;
+        @include background(url('../images/ico_arrow.jpg')no-repeat right center $input-background);
+        outline:$default-border;
+        border:0;
+        margin:2px;
+        text-transform:initial;
+    }
+}
+
+
+input.error, input.error:focus{
+    background:$error-background;
+    border: 1px solid $error-border;
+}
+
+.term{
+    width:550px;
+}

@@ -1,0 +1,6 @@
+name = Idi Default Beans
+description =  Default Bean blocks
+core = 7.x
+package = Features
+dependencies[] = idi_bean_settings
+project = idi_default_beans

@@ -1,0 +1,20 @@
+//Static block styles
+
+//Whenver you create a new static block it should get a new partial here
+
+
+//Default block variables are defaults used throughout the theme and can be found in vars.scss
+
+
+.block{
+  background:none;
+  margin: $blockMargin;
+  overflow:hidden;
+
+  &.block--menu{
+     background:$menuBlockBackground;
+     padding: $menuBlockPadding;
+     margin: $menuBlockMargin;
+     clear:both;
+  }
+}

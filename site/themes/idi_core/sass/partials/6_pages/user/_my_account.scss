@@ -1,0 +1,49 @@
+.user-profile{
+    h3.field-label{
+        font-size:16px;
+        line-height:17px;
+        color: $copy-color;
+    }
+
+    div.field{
+        margin-bottom: 20px;
+        color: $copy-color;
+        font-size:18px;
+        text-indent:25px;
+    }
+}
+
+.page-user{   
+    .tabs.tabs--primary li a{
+        @extend .button;
+        text-align:center;
+        font-weight:bold;
+    }
+}
+
+.fieldset-wrapper{
+    transition:none;
+}
+
+#edit-timezone--2{
+    width: 561px;
+}
+
+.page-user-edit{
+    #edit-submit{
+        margin-top:10px;
+    }
+}
+.page-user{
+.tabs.tabs--primary.links--inline {
+display:none;
+}
+}
+
+.user-login{
+  margin-left:10px;
+}
+
+.tabs a{
+  background-color:#ccc;
+}

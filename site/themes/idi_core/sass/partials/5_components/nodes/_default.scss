@@ -1,0 +1,19 @@
+//Default node styling
+
+//Whenever you create a node type a partial should be added
+//article.scss
+//product.scss
+//etc
+
+/*All node styling (including display mode specific styling should be done here at the node level!)*/
+
+.node{
+
+  h1{}
+
+  .node__content{}
+
+  //&.display--mode{}
+}
+
+

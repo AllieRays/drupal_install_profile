@@ -1,0 +1,18 @@
+$hiddenRegionHeight: auto;
+$hiddenRegionMargin: $regionMargin;
+$hiddenRegionPadding: $regionPadding;
+$hiddenRegionBackground: $regionBackground;
+$hiddenRegionInnerBackground:$regionInnerBackground;
+
+.l-region--hidden{
+   //make this region expressly hidden by default
+   @extend .hidden;
+
+   margin:$hiddenRegionMargin;
+   padding: $hiddenRegionPadding;
+   height: $hiddenRegionHeight;
+   @include background($hiddenRegionBackground);
+     .inner{
+       @include background($hiddenRegionInnerBackground);
+     }
+}

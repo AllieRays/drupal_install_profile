@@ -1,0 +1,64 @@
+$breadcrumbHeight: 18px;
+$breadcrumbPadding: 0;
+$breadcrumbMargin: 0;
+$breadcrumbColor: $idiDarkBlue;
+$breadcrumbLinkColor: $breadcrumbColor;
+$breadcrumbLinkHoverColor: $idiBlue;
+$breadcrumbLastChild: $idiGreen;
+$breadcrumbFont: normal #{14px}/#{$breadcrumbHeight} $master-font;
+$breadcrumbSpacing: 7px;
+
+
+
+//BREADCRUMBS
+.breadcrumbs{
+  display:none;
+  @include breakpoint($tab){
+    display:block;
+  }
+  clear:both;
+  margin-bottom: 30px;
+  padding: 15px 20px;
+  overflow:visible;
+
+
+  margin:$breadcrumbMargin;
+  padding:$breadcrumbPadding;
+  height: $breadcrumbHeight;
+  //@extend .clearfix;
+  ul{
+    @include reset-container-spacing;
+    li{
+      color:$breadcrumbColor;
+      height:$breadcrumbHeight;
+      margin-right:$breadcrumbSpacing;
+      float:left;
+      display:block;
+      font: $breadcrumbFont;
+      &:last-child{
+        color:$breadcrumbLastChild;
+      }
+      a{
+        display:inline;
+        height: $breadcrumbHeight;
+        font: $breadcrumbFont;
+        color: $breadcrumbLinkColor;
+        float:none;
+        border:none;
+
+      }
+      a:hover{
+        color: $breadcrumbLinkHoverColor;
+      }
+      /*
+        &.home a{
+        width:25px;
+        display:inline-block;
+        overflow:hidden;
+        float:left;
+        text-indent:200%;
+        @include background(url('../images/ico_home.png') 0 center no-repeat);
+      }*/
+    }
+  }
+}

@@ -1,0 +1,25 @@
+/*
+Create page partials for large page specific overrides (IE: when your homepage is drastically different from the subpages).  Use this file (pages.scss) for minor edits to specific sections/pages.
+
+Note: that this should only be used for PAGE LEVEL changes, changes contained to a node should be made at the node level
+*/
+
+//EXAMPLE
+
+/*
+  //Remove footer on about pages
+  .section-about{  //pull section or page identifier from body tag (.front, .page-node-34, .node-type-article)
+    .l-footer{
+      @extend .hidden;
+    }
+  }
+*/
+
+
+
+
+
+
+.messages.messages--warning{
+  display:none;
+}

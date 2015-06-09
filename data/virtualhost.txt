@@ -1,0 +1,75 @@
+# Directories
+# DocRoot: /opt/dev/kazaamprojects/PROJECT_NAME/web
+# Logs   : /opt/dev/kazaamprojects/PROJECT_NAME/logs/SITE_FOLDER_NAME_*_log
+# Temp   : /opt/dev/kazaamprojects/PROJECT_NAME/temp
+<VirtualHost *:80>
+  UseCanonicalName Off
+
+  ServerName DEV_DOMAIN
+
+  DirectoryIndex index.php index.html index.htm
+
+  DocumentRoot /opt/dev/kazaamprojects/PROJECT_NAME/web
+  ErrorLog /opt/dev/kazaamprojects/PROJECT_NAME/logs/SITE_FOLDER_NAME_error_log
+  # Include "X-Forwarded-For" header in log entry for, if there is a load balancer in front of the site:
+  CustomLog /opt/dev/kazaamprojects/PROJECT_NAME/logs/SITE_FOLDER_NAME_access_log "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\""
+
+  # Performance Optimizations
+  KeepAlive On
+  KeepAliveTimeout 5
+  MaxKeepAliveRequests 100
+  Timeout 30
+
+  # MIME Types for common AV content
+  AddType application/pdf .pdf
+  AddType video/mp4 .mp4
+  AddType video/webm .webm
+  AddType application/ogg .ogx
+  AddType video/ogg .ogv
+  AddType audio/ogg .oga
+  AddType audio/ogg .ogg
+  AddType audio/ogg .spx
+  AddType audio/flac .flac
+  AddType application/annodex .anx
+  AddType audio/annodex .axa
+  AddType video/annodex .axv
+  AddType application/xspf+xml .xspf
+  AddType image/svg+xml .svg
+
+  # MIME Type for IE CSS Fixes
+  AddType text/x-component .htc
+
+  DefaultType text/html
+
+  # http://httpd.apache.org/docs/2.2/misc/rewriteguide.html#url
+  # To force the use of
+  RewriteEngine On
+  #RewriteCond %{HTTP_HOST} !^DEV_DOMAIN [NC]
+  #RewriteCond %{HTTP_HOST} !^$
+  #RewriteRule ^/(.*) http://DEV_DOMAIN/$1 [R=301,L]
+
+  <IfModule mod_expires.c>
+    # Disable expirations
+    ExpiresActive Off
+  </IfModule>
+
+  # Drupal instance
+  <Directory "/opt/dev/kazaamprojects/PROJECT_NAME/web">
+    Options -Indexes -FollowSymLinks +MultiViews
+    AllowOverride None
+    Require all granted
+    Include /opt/dev/kazaamprojects/PROJECT_NAME/web/.htaccess
+  </Directory>
+
+  # Default files
+  <Directory "/opt/dev/kazaamprojects/PROJECT_NAME/web/sites/default/files">
+    php_flag engine off
+    Include /opt/dev/kazaamprojects/PROJECT_NAME/web/sites/default/files/.htaccess
+  </Directory>
+
+  # Site's files
+  <Directory "/opt/dev/kazaamprojects/PROJECT_NAME/web/sites/SITE_FOLDER_NAME/files">
+    php_flag engine off
+    Include /opt/dev/kazaamprojects/PROJECT_NAME/web/sites/SITE_FOLDER_NAME/files/.htaccess
+  </Directory>
+</VirtualHost>

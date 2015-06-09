@@ -1,0 +1,218 @@
+//Menu cores
+//Extend these for basic menu layouts
+
+//Remove Drupal Styles
+
+    ul.menu, .menu li, .menu .expanded, .menu .leaf{
+        @include reset-container-spacing;
+        @include plain-list;
+      }
+
+
+ //Horizontal Ul inline.
+.horizontal{
+    width:auto;
+    @include reset-container-spacing;
+    text-align:left;
+
+      ul{
+      list-style-position:outside;
+      list-style:none;
+      display:inline;
+      li{
+        display:inline;
+        float:none;
+        a{
+          float:none;
+          text-decoration:underline;
+          display:inline;
+          border-bottom:none;
+          &:hover{
+            text-decoration:none;
+          }
+        }
+         &.last{
+           border-right:none;
+          a{
+            border-right:none;
+          }
+        }
+        &.first{
+          border-left:none;
+          a{
+            border-left:none;
+          }
+        }
+      }
+    }
+    //Second Level
+    ul ul{
+       margin-left:20px;
+    }
+    //Third Level
+    ul ul ul{
+
+    }
+}
+
+//Horizontal Ul menus that are blocky
+.horizontal-block{
+    text-align:center;
+    overflow:visible;
+    //z-index:0;
+      ul{
+      list-style-position:outside;
+      list-style:none;
+      display:inline;
+      height:100%;
+      overflow:visible;
+      z-index:0;
+      li{
+        display:block;
+        position:relative;
+        float:left;
+        overflow:visible;
+        //z-index:0;
+        a{
+          float:left;
+          text-decoration:none;
+          display:block;
+          border-bottom:none;
+          &:hover{
+            text-decoration:none;
+          }
+        }
+        &.last{
+          border-right:none;
+          a{
+            border-right:none;
+          }
+        }
+        &.first{
+          border-left:none;
+          a{
+            border-left:none;
+          }
+        }
+      }
+    }
+    //SECOND LEVEL
+    ul li ul{
+        display:block;
+        display:none;
+        position:absolute;
+        right:auto;
+        left:0;
+        top:100%;
+        height:auto;
+        overflow:visible;
+        z-index:100;
+    li{
+      float:none;
+      height:auto;
+      overflow:visible;
+      display:block;
+      a{
+        float:none;
+        text-decoration:none;
+        display:block;
+        border-right: none;
+        border-left: none;
+        width:100%;
+        &:hover{
+          text-decoration:none;
+        }
+        &.active{
+        }
+      }
+      &.first{
+          border-top:none;
+          a{
+            border-top:none;
+          }
+      }
+      &.last{
+          border-bottom:none;
+          a{
+            border-bottom:none;
+          }
+      }
+    }
+  }
+  //Third Level
+  ul li ul li ul{
+    display:none;
+    top:0px;
+    left:100%;
+    z-index:110;
+
+  }
+}
+
+//Basic UL
+.vertical{
+
+  ul{
+
+    li{
+
+      ul{
+
+        li{
+
+        }
+      }
+    }
+  }
+}
+
+//Vertical Block Uls...
+.vertical-block{
+  @include reset-container-spacing;
+  display:block;
+  ul{
+    li{
+        display:block;
+        width:auto;
+        position:relative;
+        a, span{
+           display:block;
+           text-decoration:none;
+        }
+        &:hover{
+          a, span{
+            text-decoration:none;
+          }
+        }
+
+        &.first{
+             border-top:none;
+             a{
+               border-top:none;
+             }
+        }
+        &.last{
+             border-bottom:none;
+             a{
+                border-bottom:none;
+             }
+        }
+        &.activated, &.activated:hover{
+          a, span{
+            text-decoration:none;
+          }
+        }
+
+    }
+  }
+
+}
+//ADMIN MENU
+
+#admin-menu{
+   display:none;
+   @include breakpoint($tab){
+      display:block;
+      
+   }
+}

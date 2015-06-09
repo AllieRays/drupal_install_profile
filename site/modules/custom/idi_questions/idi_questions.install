@@ -1,0 +1,123 @@
+<?php
+/**
+ * @file
+ * Sample Bean Content to fill out icttemplate
+ */
+//http://www.pixelite.co.nz/article/how-use-entity-metadata-wrappers-drupal-7/
+include_once 'idi_questions.features.inc';
+include_once 'idi_questions.features.field_base.inc';
+include_once 'idi_questions.features.field_instance.inc';
+
+function idi_questions_load_fields(){
+    foreach(idi_questions_field_default_field_bases() as $field_base){
+        field_create_field($field_base);
+    }
+    foreach(idi_questions_field_default_field_instances() as $field_instance){
+        field_create_instance($field_instance);
+    }
+}
+
+function idi_questions_install(){
+    idi_questions_load_fields();
+}
+
+function idi_questions_uninstall(){
+}
+
+function idi_questions_enable(){
+    foreach(idi_questions_info() as $node_content){
+        $node = entity_create('node', array('type' => 'question'));
+        $node_wrap = entity_metadata_wrapper('node',$node);
+        $node_wrap->title->set($node_content['title']);
+        $node_wrap->field_question_title->set(array(
+            'value' => ($node_content['field_question_title']),
+            'format' => ('full_html'),
+        ));
+        $node_wrap->field_answer->set(array(
+            'value' => ($node_content['field_answer']),
+            'format' => ('full_html'),
+        ));
+        $node_wrap->save();
+    }
+}
+
+function idi_questions_disable(){
+    $nids = variable_get('idi_questions_node_ids', array());
+    foreach($nids as $key => $nid){
+        $node = node_load($nid);
+        node_delete($node);
+    }
+}
+
+
+function idi_questions_info(){
+    $question_one_answer = '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ';
+    $question_two_answer = 'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    $question_three_answer = '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt';
+    $question_four_answer = '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ';
+    $question_five_answer = 'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    $question_six_answer = '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt';
+    $question_seven_answer = '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ';
+    $question_eight_answer = 'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    $question_nine_answer = '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt';
+    $question_ten_answer = '"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt';
+
+    $node_content = array(
+        'Question One' => array(
+            'title' => 'Question One',
+            'field_question_title' => 'Question One',
+            'file' => 'idi_questions_content.inc',
+            'field_answer' => $question_one_answer,
+        ),
+        'Question Two' => array(
+            'title' => 'Question Two',
+            'field_question_title' => 'Question Two',
+            'field_answer' => $question_two_answer,
+        ),
+        'Question Three' => array(
+            'title' => 'Question Three',
+            'field_question_title' => 'Question Three',
+            'field_answer' => $question_three_answer,
+        ),
+        'Question Four' => array(
+            'title' => 'Question Four',
+            'field_question_title' => 'Question Four',
+            'file' => 'idi_questions_content.inc',
+            'field_answer' => $question_four_answer,
+        ),
+        'Question Five' => array(
+            'title' => 'Question Five',
+            'field_question_title' => 'Question Five',
+            'field_answer' => $question_five_answer,
+        ),
+        'Question Six' => array(
+            'title' => 'Question Six',
+            'field_question_title' => 'Question Six',
+            'field_answer' => $question_six_answer,
+        ),
+        'Question Seven' => array(
+            'title' => 'Question Seven',
+            'field_question_title' => 'Question Seven',
+            'file' => 'idi_questions_content.inc',
+            'field_answer' => $question_seven_answer,
+        ),
+        'Question Eight' => array(
+            'title' => 'Question Eight',
+            'field_question_title' => 'Question Eight',
+            'field_answer' => $question_eight_answer,
+        ),
+        'Question Nine' => array(
+            'title' => 'Question Nine',
+            'field_question_title' => 'Question Nine',
+            'field_answer' => $question_nine_answer,
+        ),
+        'Question Ten' => array(
+            'title' => 'Question Ten',
+            'field_question_title' => 'Question Ten',
+            'field_answer' => $question_ten_answer,
+        ),
+    );
+
+    return $node_content;
+}
+

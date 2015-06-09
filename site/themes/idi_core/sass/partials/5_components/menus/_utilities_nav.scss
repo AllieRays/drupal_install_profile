@@ -1,0 +1,61 @@
+//Utilities Nav (aka: Header Nav)
+
+
+//wrapping dimension settings
+$utilitiesMenuHeight : 16px;
+$utilitiesMenuMargin: 0 $horz-spacing-unit 0 0;
+$utilitiesMenuPadding: 0;
+$utilitiesMenuBackground: none;
+
+//Nav items (drop downs not supported, clone main-menu instead)
+$utilitiesMenuItemColor :$white;
+$utilitiesMenuItemHoverColor : $white;
+$utilitiesMenuItemActiveColor : $main-menu-item-hover-color;
+$utilitiesMenuItemBorder: 1px solid #FFF;
+$utilitiesMenuItemPadding: 0 15px;
+$utilitiesMenuItemFont: normal #{16px}/#{$main-menu-height} $master-font;
+
+//Utilies Nav - Core menu code is FRAGILE, alter with caution!
+//90% of styling can be accomplished above this line
+
+//Block level
+#block-menu-menu-utilities-menu{
+  min-height: $utilitiesMenuHeight;
+  margin: $utilitiesMenuMargin;
+  padding: $utilitiesMenuPadding;
+  background: $utilitiesMenuBackground;
+
+  //Override with Grid
+  /*
+  @include span(3,3);
+  @include breakpoint($tab){
+    @include span(3,9);
+  }
+  @include breakpoint($desk){
+    @include span(3,12);
+  }*/
+}
+
+//Nav level
+.utilities-nav{
+  @extend .horizontal; //Menu is horizontal, override for layout change
+  height:$utilitiesMenuHeight;
+  ul{
+    li{
+      a{
+        height:$utilitiesMenuHeight;
+        font:$utilitiesMenuItemFont;
+        color: $utilitiesMenuItemColor;
+        padding:$main-menu-item-padding;
+        border-right: $main-menu-item-border;
+        z-index:0;
+        &:hover{
+          color: $main-menu-item-hover-color;
+        }
+        &.active{
+          color: $main-menu-item-active-color;
+        }
+      }
+    }
+  }
+}

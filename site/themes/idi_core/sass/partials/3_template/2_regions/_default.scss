@@ -1,0 +1,16 @@
+//This partials variables are used globally and therefore are set in vars.scss, but may be overriden here
+
+//$regionMargin : 0 !default;
+//$regionPadding : 0 !default;
+//$regionBackground: none !default;
+//$regionInnerBackground: none !default;
+
+.l-region{
+  background:$regionBackground;
+  padding: $regionPadding;
+  margin: $regionMargin;
+  @include background($regionBackground);
+  .inner{
+    @include background($regionInnerBackground);
+  }
+}

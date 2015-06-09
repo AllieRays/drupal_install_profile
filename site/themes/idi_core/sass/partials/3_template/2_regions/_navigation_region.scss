@@ -1,0 +1,14 @@
+$navigationRegionHeight: auto;
+$navigationRegionMargin: $regionMargin;
+$navigationRegionPadding: $regionPadding;
+$navigationRegionInnerBackground:$navigationRegionBackground;
+
+.l-region--navigation{
+  margin:$navigationRegionMargin;
+  padding: $navigationRegionPadding;
+  height: $navigationRegionHeight;
+ // @include background($navigationRegionBackground);
+    .inner{
+   //   @include background($navigationRegionInnerBackground);
+    }
+}

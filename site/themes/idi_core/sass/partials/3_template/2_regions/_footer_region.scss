@@ -1,0 +1,17 @@
+//Note: Most footer styling is controlled at the footer wrapper level and this should rarely need to be altered from default
+
+$footerRegionHeight: auto;
+$footerRegionMargin: $regionMargin;
+$footerRegionPadding: $regionPadding;
+$footerRegionBackground: $regionBackground;
+$footerRegionInnerBackground:$regionInnerBackground;
+
+.l-footer .l-region--footer{
+  margin:0 auto;
+  padding: $footerRegionPadding;
+  height: $footerRegionHeight;
+  @include background($footerRegionBackground);
+    .inner{
+      @include background($footerRegionInnerBackground);
+    }
+}

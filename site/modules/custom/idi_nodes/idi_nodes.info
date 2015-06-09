@@ -1,0 +1,3 @@
+name = idi_nodes
+description = Standard IDI nodes on install
+core = 7.x

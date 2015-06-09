@@ -1,0 +1,91 @@
+//transform-origin: center bottom 0px;
+//transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.00166, 0, 0, 0, 1);
+
+$button-width: 250px;
+$button-height: 35px;
+//Button style variables
+$button-padding : 0 15px;
+$button-margin: .5em 0;
+$button-font: normal #{16px}/#{$button-height} $button-font;
+$button-color: $white;
+$button-hover-color:$white;
+$button-background: $secondary;
+$button-hover-background: $hover-color;
+$button-border-radius: none;
+
+
+.field--name-field-link{
+  float:left;
+}
+.cube {
+  float:left;
+  height: $button-height;
+  transition: transform .33s;
+  transform-style: preserve-3d;
+  display: block;
+  position:absolute;
+  line-height:$button-height;
+}
+
+.three-d {
+  perspective: 200px;
+  transition: all .07s linear;
+  position: relative;
+  cursor: pointer;
+  line-height:$button-height;
+}
+
+.three-d:hover .cube {
+  transform: translateZ(-17px) rotateX(90deg);
+}
+
+.flip-button, .button-bottom {
+  height: $button-height;
+  text-align:center;
+  padding:$button-padding;
+  background:$button-background;
+  color:$button-color;
+  border-radius:$button-border-radius;
+  text-decoration:none;
+  border:none;
+  display:block;
+  appearance:none;
+  line-height: $button-height;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 120px;
+  @extend .no-animation;
+}
+
+
+a.flip-button:hover, a.button-bottom:hover{
+  color:$white;
+}
+
+.flip-button {
+  background: $button-background-color;
+  transform: translateZ(17px);
+  text-align:center;
+}
+
+.button-bottom {
+  background: darken( $button-background-color, 10%);
+  transform: rotateX(-90deg) translateZ(-17px);
+}
+
+
+.button{
+  height: $button-height;
+  text-align:center;
+  padding:$button-padding;
+  background:$button-background;
+  color:$button-color;
+  border-radius:$button-border-radius;
+  text-decoration:none;
+  border:none;
+  display:block;
+  appearance:none;
+  line-height: $button-height;
+}

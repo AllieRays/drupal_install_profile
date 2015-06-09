@@ -1,0 +1,195 @@
+//Rotating banner styles
+
+//Note: Slides should be based on unique names but are currently ID based meaning that ordering effects styling
+
+//Note: This whole thing should be replaced with a non-custom solution like Cycle2 or Owl in a future core release
+
+//Note: See banner region partial for more wrappers.
+
+//Banner block specific styles
+$bannerHeight : 300px !default;
+$bannerMargin : 0 !default;
+$bannerPadding: 0 !default;
+$bannerBackground: $black;
+
+//Banner internal styles
+$bannerControlHeight: 12px;
+$bannerControlLeftOffset: 0; //Centered at 0
+$bannerControlBottomOffset: 5%;
+$bannerControlGap: 4px;
+$bannerControlHeight: 12px;
+$bannerControlWidth: 12px;
+$bannerControlBorderRadius: 90px;
+$bannerControlBackground: $idiOrange;
+$bannerControlHoverBackground: $idiBlue;
+$bannerControlActiveBackground: $idiGreen;
+
+$bannerStepperWidth: 25px;
+$bannerStepperHeight: 25px;
+$bannerStepperBottomOffset: 5%;
+$bannerStepperSideOffset: 5%;
+
+$bannerNextBackground: url(../images/img_next.png) 4px 3px no-repeat #666;
+$bannerNextHoverBackground: url(../images/img_next-o.png) 4px 3px no-repeat #999;
+
+$bannerPreviousBackground: url(../images/img_back.png) 4px 3px no-repeat #666;
+$bannerPreviousHoverBackground: url(../images/img_back-o.png) 4px 3px no-repeat #999;
+
+
+
+//Block Level Banner Styles
+#block-views-slide-rotator-block{
+  height: $bannerHeight;
+  margin: $bannerMargin;
+  padding: $bannerPadding;
+  background: $bannerBackground;
+  clear:both;
+  position:relative;
+  .block__content{
+     width:auto;
+     height: $bannerHeight;
+  }
+}
+
+//View level banner styles
+.view-slide-rotator{
+  @include slide-wrap;
+  .view-content{
+    position:relative;
+    @include slide-wrap;
+  }
+
+  .view-row{
+    display:none;
+    @include slide-wrap;
+    overflow:hidden;
+    position:relative;
+
+    .background{
+      position:absolute;
+      @include slide-wrap;
+    }
+
+    &.active{display:block}
+  }
+
+    //CONTROLS
+  .previous, .next{
+    @include pie-element(relative);
+    position:absolute;
+    bottom:$bannerStepperBottomOffset;
+    left:$bannerStepperBottomOffset;
+    height:$bannerStepperHeight;
+    width:$bannerStepperWidth;
+    display:block;
+    overflow:hidden;
+    text-indent:100%;
+    z-index:100;
+    color: $lightGray;
+    @include background($bannerPreviousBackground);
+    &:hover{@include background($bannerPreviousHoverBackground);}
+  }
+  .next{
+    left:auto;
+    right:$bannerStepperBottomOffset;
+    @include background($bannerNextBackground);
+    &:hover{@include background($bannerNextHoverBackground);}
+  }
+  .controls{
+    /*display:none;*/
+
+    height:$bannerControlHeight;
+    width:100%;
+    z-index:10;
+    left: $bannerControlLeftOffset;
+    bottom:$bannerControlBottomOffset;
+    position:absolute;
+    .inner{
+      width:auto;
+      height:auto;
+      height:$bannerControlHeight;
+      margin:0 auto;
+      position:relative;
+      left:$bannerControlGap;
+      min-width:0px;
+    }
+    .control{
+      z-index:10;
+      cursor:pointer;
+      height:$bannerControlHeight;
+      width:$bannerControlWidth;
+      float:left;
+      margin-right:$bannerControlGap;
+      @include pie-element(relative);
+      border-radius: $bannerControlBorderRadius;
+      overflow:hidden;
+      text-indent:100%;
+      @include background($bannerControlBackground);
+      &.active{
+        @include background($bannerControlActiveBackground);
+      }
+      &:hover{
+        @include background($bannerControlHoverBackground);
+      }
+    }
+
+  }
+
+$bannerTextH3Font: $h3Font;
+$bannerTextH3Color: $h3-color;
+$bannerTextH3Margin: $h3-margin;
+
+$bannerTextH4Font: $h4Font;
+$bannerTextH4Color: $h4-color;
+$bannerTextH4Margin: $h4-margin;
+
+  .slide-content{
+    @include slide-wrap;
+    display:block;
+    position:absolute;
+
+    .text{
+       h3{
+
+       }
+       h4{
+
+       }
+       p{
+
+        }
+    }
+    .notice{
+
+    }
+    .button{
+
+     }
+
+  }
+ //Slide specific styles (can be broken into new partials if these get crazy)
+
+ //Slide 1
+  #slide-0{
+
+    @include background(url(../images/banners/img_banner-1-m.jpg) center center no-repeat $white);
+    @include breakpoint($tab) {
+      @include background(url(../images/banners/img_banner-1-t.jpg) center center no-repeat $white);
+    }
+    @include breakpoint($desk) {
+      @include background(url(../images/banners/img_banner-1-d.jpg) center center no-repeat $white);
+    }
+  }
+
+//Slide 2
+#slide-1{
+
+    @include background(url(../images/banners/img_banner-2-m.jpg) center center no-repeat $white);
+    @include breakpoint($tab) {
+      @include background(url(../images/banners/img_banner-2-t.jpg) center center no-repeat $white);
+    }
+    @include breakpoint($desk) {
+      @include background(url(../images/banners/img_banner-2-d.jpg) center center no-repeat $white);
+    }
+  }
+}

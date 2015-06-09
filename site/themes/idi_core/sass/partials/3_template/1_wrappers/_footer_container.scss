@@ -1,0 +1,60 @@
+//Set variables for the footer wrapper
+//Note that this is NOT the footer region and may wrap multiple regions
+$footer-height : 100px !default;
+$footer-margin : 0 !default;
+$footer-padding: 0 !default;
+$footer-background : $footer-color !default;
+$footer-inner-height : 100px !default;
+$footer-inner-margin : 0 auto !default;
+$footer-inner-padding: 15px 0 15px 0 !default;
+$footer-inner-background : none !default;
+$footer-border: 2px solid $secondary;
+
+//Set default block behavior within this region
+$footer-block-margin: 0 $horz-spacing-unit 0 0;
+$footer-block-padding: 0;
+$footer-block-border: none;
+$footer-block-float: right;
+$footer-block-background: none;
+
+.l-footer{
+   @include background($footer-background);
+   min-height:$footer-height;
+   margin:$footer-margin;
+   width:100%;
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   left: 0;
+  border-top: $footer-border;
+   @include clearfix;
+  .inner{
+      @include background($footer-inner-background);
+      min-height:$footer-inner-height;
+      margin:$footer-inner-margin;
+      padding:$footer-inner-padding;
+      max-width:$container-width;
+      @include clearfix;
+      .inner{
+          //Resetting inner so that it doesn't inheiret from the main wrapper
+          margin:0;
+          @include reset-container-spacing;
+          background:none;
+        }
+   }
+  .l-region{
+        //Set default region behavior to reset/collapse
+        //float:left;
+        @include reset-container-spacing;
+        background:none;
+        .block{
+          //Set default block behavoir within footer regions (again collapsing)
+         // float:$footer-block-float;
+          margin:$footer-block-margin;
+          padding:$footer-block-padding;
+          border:$footer-block-border;
+          @include background($footer-block-background);
+          text-align:center;
+        }
+   }
+ }

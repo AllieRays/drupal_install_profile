@@ -1,0 +1,41 @@
+// Import variables, abstractions, base styles and components using globbing.
+//
+// Globbing will always import files alphabetically. Optimally, all your
+// components should be self-contained and explicit enough to not have any
+// contained styles leak into unrelated components: The import order should not
+// affect the result.
+//
+// If there are variables, functions or mixins that depend on each other and
+// therefore need to be imported in a specific order you can import them
+// directly. Variables-, function- or mixin providing partials should never
+// output any styles themselves: Importing them multiple times to resolve
+// dependencies shouldn't be a problem.
+
+//@import "base/*";
+//Import the carefully ordered base variable and mixin partials
+@import "partials/1_base/1_dependencies";
+@import "partials/1_base/2_typography";
+@import "partials/1_base/3_colors";
+@import "partials/1_base/4_vars";
+@import "partials/1_base/5_mixins";
+@import "partials/1_base/6_utility_classes";
+@import "partials/1_base/7_utils";
+
+//Normalize our markup
+@import "normalize";
+//Important everything else (numbered to indicate the order in which they should be completed)
+
+
+//Atomic level tags
+@import "partials/2_tags/**/*";
+//Regions and wrapper
+@import "partials/3_template/**/*";
+//Drupal fields
+@import "partials/4_fields/**/*";
+//Components (blocks, views, nodes, etc.)
+@import "partials/5_components/**/*";
+//Page specific overrides
+
+
+
+@import "partials/6_pages/**/*";

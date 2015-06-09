@@ -1,0 +1,40 @@
+<?php
+
+function idi_default_beans_block_info_alter(&$blocks, $theme, $code_blocks)
+{
+    global $theme_key;
+    $themes = list_themes(); //$theme_object->name
+    $theme_object = $themes[$theme_key];
+   // watchdog_array('idi_default_beans', 'theme', $theme_object);
+    foreach ($blocks['bean'] as $key => $block) {
+//$theme == variable_get('theme_default', '0')
+        //
+       if ($blocks['bean'][$key]['theme'] == variable_get('omega', '0') || $blocks['bean'][$key]['theme'] == variable_get('seven', 0)) {
+           $blocks['bean'][$key]['status'] = 0;
+            //watchdog_array('idi_default_beans', 'disable', $block);
+       }
+        if($blocks['bean'][$key]['theme'] == variable_get('theme_default', '0')){
+            if ($blocks['bean'][$key]['delta'] == 'footer-content') {
+                $blocks['bean'][$key]['region'] = 'footer';
+                $blocks['bean'][$key]['status'] = 1;
+                $blocks['bean'][$key]['weight'] = 2;
+               //watchdog_array('idi_default_beans', 'bean block', $blocks['bean'][$key]);
+            }
+            if ($blocks['bean'][$key]['delta'] == 'footer-logo') {
+                $blocks['bean'][$key]['region'] = 'footer';
+                $blocks['bean'][$key]['status'] = 1;
+                $blocks['bean'][$key]['weight'] = 1;
+                //watchdog_array('idi_default_beans', 'bean block', $blocks['bean'][$key]);
+            }
+            if ($blocks['bean'][$key]['delta'] == 'front-banner') {
+                $blocks['bean'][$key]['region'] = 'banner';
+                $blocks['bean'][$key]['status'] = 1;
+                $blocks['bean'][$key]['weight'] = 1;
+                $blocks['bean'][$key]['visibility'] = 1;
+                $blocks['bean'][$key]['pages'] = 'front';
+                //watchdog_array('idi_default_beans', 'bean block', $blocks['bean'][$key]);
+            }
+        }
+    }
+    //watchdog_array('idi_default_beans', 'end blocks', $blocks);
+}

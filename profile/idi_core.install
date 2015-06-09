@@ -1,0 +1,609 @@
+<?php
+
+/**
+ * @file
+ * The install file for the SITE_FOLDER_NAME distribution.
+ *
+ * @copyright Copyright(c) 2014 Inventiv Digital
+ * used https://www.drupal.org/project/agov and https://www.drupal.org/project/standard for reference
+ * https://www.drupal.org/node/1022020 -- How to Write a Drupal 7 Installation Profile
+ *
+ */
+
+//************* Set global variables *************/
+
+/* Define a default theme constant*/
+define('SITE_FOLDER_NAME_DEFAULT_THEME', 'THEME_FOLDER_NAME');
+/* Define the install theme. */
+define('SITE_FOLDER_NAME_DEFAULT_BASE_THEME', 'omega');
+/* Define the admin theme.*/
+define('SITE_FOLDER_NAME_DEFAULT_ADMIN_THEME', 'seven');
+/* Define the role to be used as the admin role.*/
+define('SITE_FOLDER_NAME_ADMIN_ROLE_ID', '2');
+/*Define sitename*/
+define('SITE_FOLDER_NAME_SITENAME', 'SITE_NAME');
+
+
+function idi_core_install() {
+  // Configure default text formats and basic permissions.
+  _idi_core_default_formats_and_permissions();
+
+  // Set default front-end and admin themes.
+  _idi_core_set_default_themes();
+
+  // Setup some default blocks.
+  _idi_core_default_blocks();
+
+  // Setup some default content types.
+  _idi_core_default_content_types();
+
+  // Set default tags.
+  _idi_core_default_tags();
+
+  // Enable full image display mode.
+  _idi_core_install_full_image_display();
+
+  // Setup login destination.
+  _idi_core_setup_login_details();
+
+  // Define some site variables.
+  _idi_core_set_variables();
+
+  // Set default menu items.
+  _idi_core_set_menu();
+
+  //clear caches
+  _idi_core_cleanup();
+
+  // config custom modules with content on default
+  _idi_core_modules();
+
+  // Configure basic roles.
+  _idi_core_create_basic_roles_perms();
+
+  // flush drupal caches
+  drupal_flush_all_caches();
+}
+
+function _idi_core_default_formats_and_permissions() {
+  // Add text formats.
+  global $filtered_html_format, $full_html_format;
+
+  $full_html_format = array(
+    'format' => 'full_html',
+    'name' => 'Full HTML',
+    'weight' => 0,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+  $full_html_format = (object) $full_html_format;
+  filter_format_save($full_html_format);
+
+  $filtered_html_format = array(
+    'format' => 'filtered_html',
+    'name' => 'Filtered HTML',
+    'weight' => 0,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // HTML filter.
+      'filter_html' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+  $filtered_html_format = (object) $filtered_html_format;
+  filter_format_save($filtered_html_format);
+
+}
+
+function _idi_core_set_default_themes() {
+  $default_theme = SITE_FOLDER_NAME_DEFAULT_THEME;
+  $base_theme = SITE_FOLDER_NAME_DEFAULT_BASE_THEME;
+  $admin_theme = SITE_FOLDER_NAME_DEFAULT_ADMIN_THEME;
+  // disable all themes
+  db_update('system')
+    ->fields(array('status' => 0))
+    ->condition('type', 'theme')
+    ->execute();
+  // enable $default_theme
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', $default_theme)
+    ->execute();
+  // enable $base_theme
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', $base_theme)
+    ->execute();
+  // enable $admin_theme
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', $admin_theme)
+    ->execute();
+  variable_set('theme_default', $default_theme);
+  variable_set('admin_theme', $admin_theme);
+  // activate admin theme when editing a node
+  variable_set('node_admin_theme', '1');
+  // Enable the admin theme.
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', 'seven')
+    ->execute();
+  variable_set('admin_theme', 'seven');
+  variable_set('site_name', SITE_FOLDER_NAME_SITENAME);
+  variable_set('node_admin_theme', '1');
+}
+
+function _idi_core_default_blocks() {
+  $default_theme = SITE_FOLDER_NAME_DEFAULT_THEME;
+  $base_theme = SITE_FOLDER_NAME_DEFAULT_BASE_THEME;
+  $admin_theme = SITE_FOLDER_NAME_DEFAULT_ADMIN_THEME;
+  $blocks = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => $default_theme,
+      'status' => 0,
+      'weight' => -1,
+      'region' => 'second-sidebar',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'node',
+      'delta' => 'recent',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'dashboard_main',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => $default_theme,
+      'status' => 0,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'main-menu',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => -1,
+      'region' => 'navigation',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'navigation',
+      'theme' => $default_theme,
+      'status' => 0,
+      'weight' => 0,
+      'region' => 'navigation',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'powered-by',
+      'theme' => $default_theme,
+      'status' => 0,
+      'weight' => 10,
+      'region' => 'footer',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'new',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'dashboard_sidebar',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => -10,
+      'region' => 'dashboard_sidebar',
+      'pages' => '',
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  foreach ($blocks as $block) {
+    $query->values($block);
+  }
+  $query->execute();
+
+}
+
+function _idi_core_default_content_types() {
+  // Insert default pre-defined node types into the database. For a complete
+  // list of available node type attributes, refer to the node type API
+  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+  $types = array(
+    array(
+      'type' => 'article',
+      'name' => st('Article'),
+      'base' => 'node_content',
+      'description' => st('Use <em>articles</em> for time-sensitive content like news, press releases or blog posts.'),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    node_add_body_field($type);
+  }
+
+  // Insert default pre-defined RDF mapping into the database.
+  $rdf_mappings = array(
+    array(
+      'type' => 'node',
+      'bundle' => 'page',
+      'mapping' => array(
+        'rdftype' => array('foaf:Document'),
+      ),
+    ),
+    array(
+      'type' => 'node',
+      'bundle' => 'article',
+      'mapping' => array(
+        'field_image' => array(
+          'predicates' => array('og:image', 'rdfs:seeAlso'),
+          'type' => 'rel',
+        ),
+        'field_tags' => array(
+          'predicates' => array('dc:subject'),
+          'type' => 'rel',
+        ),
+      ),
+    ),
+  );
+  foreach ($rdf_mappings as $rdf_mapping) {
+    rdf_mapping_save($rdf_mapping);
+  }
+
+  // Default "Basic page" to not be promoted and have comments disabled.
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
+
+  // Don't display date and author information for "Basic page" nodes by default.
+  variable_set('node_submitted_page', FALSE);
+}
+
+function _idi_core_default_tags() {
+  // Create a default vocabulary named "Tags", enabled for the 'article' content type.
+  $description = st('Use tags to group articles on similar topics into categories.');
+  $vocabulary = (object) array(
+    'name' => st('Tags'),
+    'description' => $description,
+    'machine_name' => 'tags',
+  );
+  taxonomy_vocabulary_save($vocabulary);
+
+  $field = array(
+    'field_name' => 'field_' . $vocabulary->machine_name,
+    'type' => 'taxonomy_term_reference',
+    // Set cardinality to unlimited for tagging.
+    'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+    'settings' => array(
+      'allowed_values' => array(
+        array(
+          'vocabulary' => $vocabulary->machine_name,
+          'parent' => 0,
+        ),
+      ),
+    ),
+  );
+  field_create_field($field);
+
+  $help = st('Enter a comma-separated list of words to describe your content.');
+  $instance = array(
+    'field_name' => 'field_' . $vocabulary->machine_name,
+    'entity_type' => 'node',
+    'label' => 'Tags',
+    'bundle' => 'article',
+    'description' => $help,
+    'widget' => array(
+      'type' => 'taxonomy_autocomplete',
+      'weight' => -4,
+    ),
+    'display' => array(
+      'default' => array(
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+}
+
+function _idi_core_install_full_image_display() {
+  // Create an image field named "Image", enabled for the 'article' content type.
+  // Many of the following values will be defaulted, they're included here as an illustrative examples.
+  // See http://api.drupal.org/api/function/field_create_field/7
+
+  $field = array(
+    'field_name' => 'field_image',
+    'type' => 'image',
+    'cardinality' => 1,
+    'locked' => FALSE,
+    'indexes' => array('fid' => array('fid')),
+    'settings' => array(
+      'uri_scheme' => 'public',
+      'default_image' => FALSE,
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+    ),
+  );
+  field_create_field($field);
+
+
+  // Many of the following values will be defaulted, they're included here as an illustrative examples.
+  // See http://api.drupal.org/api/function/field_create_instance/7
+  $instance = array(
+    'field_name' => 'field_image',
+    'entity_type' => 'node',
+    'label' => 'Image',
+    'bundle' => 'article',
+    'description' => st('Upload an image to go with this article.'),
+    'required' => FALSE,
+    'settings' => array(
+      'file_directory' => 'field/image',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'alt_field' => TRUE,
+      'title_field' => '',
+    ),
+    'widget' => array(
+      'type' => 'image_image',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+        'preview_image_style' => 'thumbnail',
+      ),
+      'weight' => -1,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'large', 'image_link' => ''),
+        'weight' => -1,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'medium', 'image_link' => 'content'),
+        'weight' => -1,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+}
+
+function _idi_core_set_menu() {
+  // Set main menu links
+  $items = array(
+    array(
+      'link_title' => st('Home'),
+      'link_path' => '<front>',
+      'menu_name' => 'main-menu',
+      'weight' => -10,
+      'options' => array(
+        'attributes' => array(
+          'class' => array(
+            'fa-home'
+          )
+        )
+      )
+    ),
+
+  );
+
+  foreach ($items as $item) {
+    menu_link_save($item);
+  }
+  // Update the menu router information.
+  menu_rebuild();
+}
+
+function _idi_core_setup_login_details() {
+  // Enable user picture support and set the default to a square thumbnail option.
+  variable_set('user_pictures', '1');
+  variable_set('user_picture_dimensions', '1024x1024');
+  variable_set('user_picture_file_size', '800');
+  variable_set('user_picture_style', 'thumbnail');
+
+  // Allow visitor account creation with administrative approval.
+  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+}
+
+function _idi_core_set_variables() {
+  $variables = array(
+
+    // Pathauto default.
+    'pathauto_node_pattern' => '[node:title]',
+    'pathauto_punctuation_hyphen' => 1,
+    'pathauto_taxonomy_term_pattern' => '[term:vocabulary]/[term:name]',
+    'pathauto_user_pattern' => 'users/[user:name]',
+    'pathauto_reduce_ascii' => 1,
+    'path_alias_whitelist' => array(
+      'node' => TRUE,
+      'taxonomy' => TRUE,
+      'user' => TRUE,
+    ),
+    // 403 to 404 settings.
+    //'site_403' => '404',
+
+    // Session lifetime 0.
+    'session_cookie_lifetime_type' => 'browser_session',
+    // Soft block users after 5 failed login attempts in 24 hours.
+    'login_security_user_wrong_count' => '5',
+    'login_security_track_time' => '24',
+    // Display last login time.
+    'login_security_last_access_timestamp' => 1,
+    'login_security_last_login_timestamp' => 1,
+  );
+  foreach ($variables as $key => $value) {
+    variable_set($key, $value);
+  }
+
+}
+
+function _idi_core_cleanup() {
+  cache_clear_all();
+}
+
+function _idi_core_modules() {
+  module_enable(array('ict_basic_page', 'idi_bean_settings', 'bean_ctas', 'idi_default_beans', 'idi_nodes', 'idi_questions'));
+  module_disable(array('comment'));
+}
+
+function _idi_core_create_basic_roles_perms() {
+
+  $weight = 1;
+  $base_permissions = array('access administration menu');
+
+    // Content approver.
+  $roles['ADMINISTRATOR'] = array(
+      'name' => 'ADMINISTRATOR',
+      //'weight' => $weight++,
+      'permissions' => $base_permissions,
+  );
+
+    $roles['content_editor'] = array(
+        'name' => ' Content editor',
+        'weight' => $weight++,
+        'permissions' => $base_permissions,
+    );
+
+  // Create the roles.
+  foreach ($roles as $role) {
+      $role_object = new stdClass();
+      $role_object->name = $role['name'];
+      $role_object->weight = $role['weight'];
+
+      // Save the role.
+      user_role_save($role_object);
+
+      // Grant permissions.
+      if (!empty($role['permissions'])) {
+          user_role_grant_permissions($role_object->rid, $role['permissions']);
+
+      }
+  }
+
+  // Update the weight of the administrator role so its last.
+  $admin_role = user_role_load(administrator);
+  $admin_role->weight = $weight;
+  user_role_save($admin_role);
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'view any block_cta bean', 'view any default_beans bean'));
+}

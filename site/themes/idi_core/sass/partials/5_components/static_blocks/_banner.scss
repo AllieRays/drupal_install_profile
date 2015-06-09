@@ -1,0 +1,19 @@
+//Banner block specific styles
+
+$bannerHeight : auto;
+$bannerMargin : 0 !default;
+$bannerPadding: 0 !default;
+$bannerBackground: $black;
+
+#block-views-slide-rotator-block{
+  height: $bannerHeight;
+  margin: $bannerMargin;
+  padding: $bannerPadding;
+  background: $bannerBackground;
+  clear:both;
+  position:relative;
+  .block__content{
+     width:auto;
+     height: $bannerHeight;
+  }
+}

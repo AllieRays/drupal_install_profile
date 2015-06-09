@@ -1,0 +1,48 @@
+//Static footer copyright/disclaimer block
+
+.footer-copy{
+  clear:both;
+  @include breakpoint($tab){
+    @include span(last 6 of 9);
+  }
+  @include breakpoint($desk){
+    @include span(6 of 12);
+    @include push(3 of 12);
+  }
+}
+
+
+
+#block-block-2{
+  a{
+    padding:5px 15px;
+    display:inline-block;
+  }
+}
+
+
+#block-bean-footer-content{
+  p{
+    margin-bottom:0;
+  }
+
+  a{
+    margin:0 15px;
+    line-height:30px;
+  }
+}
+
+#block-bean-footer-logo{
+  margin-top:8px;
+  p{
+    margin:0;
+  }
+  img{
+    display:block;
+    margin:0 auto;
+  }
+  a{
+    display: inline-block;
+    overflow: hidden;
+  }
+}

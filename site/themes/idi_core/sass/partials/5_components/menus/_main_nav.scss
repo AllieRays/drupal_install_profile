@@ -1,0 +1,123 @@
+//MAIN Menu wrapping dimension settings
+$main-menu-height: 45px;
+$mainMenuMargin : 0;
+$mainMenuPadding: $menuBlockPadding;
+$main-menu-background: $idiBlue;
+
+//Drop down dimensions
+$dropDownWidth: 200px;
+$dropDownWidthLvlTwo: $dropDownWidth;
+$dropDownWidthLvlThree: $dropDownWidthLvlTwo;
+
+//Style 1st level (sets defaults for others)
+$main-men-item-background: $main-menu-background;
+$main-menu-background-hover: $primary-hover-color;
+$main-menu-item-active-background : $idiGreen;
+$main-menu-item-color: $white;
+$main-menu-item-hover-color: $idiBlue;
+$main-menu-item-hover-color : $primary-hover-color;
+$main-menu-item-active-color : $main-menu-item-hover-color;
+$main-menu-item-border: 1px solid #FFF;
+$main-menu-item-padding: 0 15px;
+$main-menu-item-font: normal #{em(16)}/#{$main-menu-height} $master-font;
+
+
+
+//Menu Blocks style
+#block-system-main-menu{
+//  min-height: $main-menu-height;
+  margin: $mainMenuMargin;
+  padding: $mainMenuPadding;
+  background: $main-menu-background;
+  display: none;
+  @extend .no-animation;
+  height: auto;
+  @include breakpoint($tab){
+  display: block;
+  }
+
+  .block__title{
+  display:none;
+}
+}
+
+
+#block-system-main-menu ul li.first.leaf{
+  .fa{
+    font-size: 25px;
+      vertical-align: middle;
+  }
+   span{
+  display:none;
+  }
+}
+
+
+.block--system-main-menu{
+  @extend .horizontal-block; //Extends for layout
+  //@include clearfix;
+  //overflow:visible; //Clearfix ads overflow hidden and we can't have that
+  height:$main-menu-height;
+  //FIRST LEVEL
+  ul{
+    li{
+      width:100%;
+      @include breakpoint($tab){
+      width:auto;
+      }
+      a{
+        height:$main-menu-height;
+        font:$main-menu-item-font;
+        //color: $main-menu-item-color;
+       // background:$main-men-item-background;
+        padding:$main-menu-item-padding;
+        z-index:0;
+        width:100%;
+        border-bottom: $main-menu-item-border;
+        @include breakpoint($tab){
+        border-bottom: none;
+        }
+        &:hover{
+       //   color: $main-menu-item-hover-color;
+          background:$main-menu-background-hover;
+        }
+        &.active{
+       //   background-color:$main-menu-background-hover;
+          color:$main-menu-item-hover-color;
+        }
+      }
+    }
+  }
+}
+
+
+.block--system-main-menu li.first.leaf a{
+  border-top: $main-menu-item-border;
+  @include breakpoint($tab){
+    border-top: none;
+  }
+}
+
+
+  //Burger styling
+  #main-menu-burger{
+      @include reset-container-spacing;
+      font: $main-menu-item-font;
+      display:block;
+      float:left;
+      line-height:$main-menu-height;
+    //  color: $primary-text;
+      width:100%;
+      padding-left:5px;
+      height:$main-menu-height;
+      @extend .no-animation;
+      &:hover{
+      //    color:$primary-text-hover;
+      //    background:$main-menu-background-hover;
+      }
+      &.active{
+      }
+      @include breakpoint($tab){
+           display:none;
+        }
+      }
